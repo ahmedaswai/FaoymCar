@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="vertx-3.5.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/vertx-core-3.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/vertx-web-3.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/vertx-codegen-3.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty/netty-all-4.1.17.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/jackson-databind-2.9.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/jackson-annotations-2.9.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vert.x/jackson-core-2.9.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/netty/netty-all-4.1.17.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
