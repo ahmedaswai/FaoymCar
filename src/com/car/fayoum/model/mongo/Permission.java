@@ -40,10 +40,7 @@ public enum Permission {
     }
     public static void main(String[]args){
 
-        System.out.println(Permission.getSumPermissions( Arrays.asList(Permission.ADD_CUSTOMER,Permission.ADD_DRIVER)));
-        System.out.println(Permission.getSumPermissions(new ArrayList<>()));
-        System.out.println(Permission.PERMISSION_MAP);
-        System.out.println(getPermissions(9));
+
 
     }
 }

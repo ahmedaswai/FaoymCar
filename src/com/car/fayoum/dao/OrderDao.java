@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class OrderDao implements IDao<Order> {
     @Override
-    public Boolean add(Order order) {
-       return getDataStore().save(order)!=null;
+    public Long save(Order order) {
+     return null;
     }
 
     @Override
-    public Boolean update(Order order) {
+    public Order update(Order order) {
         return null;
     }
 
