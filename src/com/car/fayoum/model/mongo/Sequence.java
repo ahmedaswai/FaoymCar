@@ -6,7 +6,7 @@ import org.mongodb.morphia.utils.IndexType;
 
 @Entity("sequence")
 @Indexes(
-        {@Index(value = "colName", fields =@Field("colName"))
+        {@Index(value = "colName", fields = @Field("colName"), options = @IndexOptions(unique = true))
 
         }
 )

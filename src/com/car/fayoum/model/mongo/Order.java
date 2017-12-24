@@ -32,7 +32,7 @@ public class Order  extends GenericEntity{
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void location(Location location) {
         this.location = location;
     }
 
@@ -40,7 +40,7 @@ public class Order  extends GenericEntity{
         return destLocation;
     }
 
-    public void setDestLocation(Location destLocation) {
+    public void destLocation(Location destLocation) {
         this.destLocation = destLocation;
     }
 

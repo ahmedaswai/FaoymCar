@@ -2,17 +2,40 @@ package com.car.fayoum.dao;
 
 import com.car.fayoum.model.mongo.GenericEntity;
 import com.car.fayoum.model.mongo.Sequence;
+import com.car.fayoum.model.mongo.User;
+import com.mongodb.WriteConcern;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
 /**
  * Created by ahmedissawi on 12/8/17.
  */
-public abstract class GenericDao<T> implements IDao<T> {
+public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
 
-    public void setId(T o) {
-        GenericEntity entity = (GenericEntity) o;
+    public static final String ID="id";
+
+
+    @Override
+    public T update(T t) {
+        WriteConcern concern = WriteConcern.ACKNOWLEDGED;
+
+        getDataStore().merge(t, concern);
+        return t;
+    }
+
+    @Override
+    public T saveOrMerge(T t) {
+        if (t.getId() == null) {
+            setId(t);
+        } else {
+            update(t);
+        }
+        return t;
+    }
+
+    public void setId(T entity) {
+
         if (entity.getId() == null) {
             String entityName = entity.getCollectionName();
             Long id = 1L;
@@ -27,10 +50,30 @@ public abstract class GenericDao<T> implements IDao<T> {
 
             }
             if (id != null) {
-                entity.setId(id);
+                entity.id(id);
             }
 
 
         }
+    }
+
+    public T save(T t) {
+
+        if(t!=null){
+
+            setId(t);
+            getDataStore().save(t);
+        }
+        return t;
+    }
+
+    public Boolean isExists(T entity) {
+
+        Query query=getDataStore().
+                createQuery(entity.getClass()).field(ID).
+                equal(entity.getId());
+
+        long count=query.count();
+        return count>0;
     }
 }

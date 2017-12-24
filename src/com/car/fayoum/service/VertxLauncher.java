@@ -1,5 +1,8 @@
 package com.car.fayoum.service;
 
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Future;
+import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -9,10 +12,13 @@ import io.vertx.ext.web.Router;
 /**
  * Created by ahmedissawi on 12/10/17.
  */
-public class VertxLauncher {
+public class VertxLauncher extends AbstractVerticle {
 
-    public static void main (String[]args){
-        Vertx vertx=Vertx.vertx();
+
+    private final Vertx vertx = Vertx.vertx();
+
+    @Override
+    public void start(Future<Void> startFuture) throws Exception {
         HttpServer server = vertx.createHttpServer();
 
 
@@ -22,23 +28,34 @@ public class VertxLauncher {
                 routingContext.response()
                         .setStatusCode(200).end("Test it"));
 
-        mainRouter.route(HttpMethod.GET,"/test/:id?:name")
-                .produces("APPLICATION/JSON")
-                .handler(routingContext ->{
-            String id = routingContext.request().getParam("id");
-            String name=routingContext.request().getParam("name");
-                    JsonObject object=new JsonObject();
-                    object.put("id",id);
-                    object.put("name",name);
-            System.out.println(routingContext.request().params().entries().toString());
-            routingContext.response()
 
-                        .setStatusCode(200).end(object.toBuffer());
-        });
+        UserService service = new UserService();
 
+        service.registerHandler(mainRouter);
 
+        server.requestHandler(mainRouter::accept);
 
+        server.listen(8080, (rs -> {
+            if (rs.succeeded()) {
+                startFuture.complete();
+            } else {
+                startFuture.fail(rs.cause());
+            }
+        }));
 
-        server.requestHandler(mainRouter::accept).listen(8080);
+    }
+
+    @Override
+    public void stop(Future<Void> stopFuture) throws Exception {
+        vertx.close(res -> vertx.close(stopFuture.completer()));
+    }
+
+    @Override
+    public JsonObject config() {
+        return super.config();
+    }
+
+    public static void main(String[] args) {
+        Vertx.vertx().deployVerticle(VertxLauncher.class.getName());
     }
 }
