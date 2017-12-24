@@ -11,8 +11,9 @@ import org.mongodb.morphia.query.UpdateOperations;
 public abstract class GenericDao<T> implements IDao<T> {
 
 
-    public void setId(T o) {
-        GenericEntity entity = (GenericEntity) o;
+    public static final String ID="id";
+    public void setId(GenericEntity entity) {
+
         if (entity.getId() == null) {
             String entityName = entity.getCollectionName();
             Long id = 1L;
@@ -27,10 +28,27 @@ public abstract class GenericDao<T> implements IDao<T> {
 
             }
             if (id != null) {
-                entity.setId(id);
+                entity.id(id);
             }
 
 
         }
+    }
+
+    public GenericEntity save(GenericEntity t){
+        if(t!=null){
+            setId(t);
+            getDataStore().save(t);
+        }
+        return t;
+    }
+    public Boolean isExists(T t){
+        GenericEntity entity=(GenericEntity)t;
+        Query query=getDataStore().
+                createQuery(t.getClass()).field(ID).
+                equal(entity.getId());
+
+        long count=query.count();
+        return count>0;
     }
 }

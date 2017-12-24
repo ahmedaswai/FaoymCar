@@ -12,7 +12,7 @@ import java.util.Date;
 public abstract class GenericEntity {
     @Id
     private ObjectId mongoId;
-    private Long id;
+    protected Long id;
 
     private Integer updatedBy;
     private String clientInfo;
@@ -22,47 +22,65 @@ public abstract class GenericEntity {
         return mongoId;
     }
 
-    public void setMongoId(ObjectId mongoId) {
+    public GenericEntity mongoId(ObjectId mongoId) {
+
         this.mongoId = mongoId;
+        return this;
+
     }
 
+    public GenericEntity id(Long id) {
+        this.id=id;
+        return this;
+    }
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
     public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Integer updatedBy) {
+    public GenericEntity updatedBy(Integer updatedBy) {
+
         this.updatedBy = updatedBy;
+        return this;
     }
 
     public String getClientInfo() {
         return clientInfo;
     }
 
-    public void setClientInfo(String clientInfo) {
+    public GenericEntity setClientInfo(String clientInfo) {
+
         this.clientInfo = clientInfo;
+        return this;
     }
 
     public Date getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public GenericEntity setUpdatedOn(Date updatedOn) {
+
         this.updatedOn = updatedOn;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("");
+        sb.append("mongoId=").append(mongoId);
+        sb.append(", id=").append(id);
+        sb.append(", updatedBy=").append(updatedBy);
+        sb.append(", clientInfo='").append(clientInfo).append('\'');
+        sb.append(", updatedOn=").append(updatedOn);
+
+        return sb.toString();
     }
 
     public abstract String getCollectionName();
-    @PrePersist
-    public void prePresist(){
-        if(id==null){
 
-        }
-    }
 }

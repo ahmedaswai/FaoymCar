@@ -1,5 +1,6 @@
 package com.car.fayoum.dao;
 
+import com.car.fayoum.model.mongo.GenericEntity;
 import org.mongodb.morphia.Datastore;
 
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.List;
  * Created by ahmedissawi on 12/7/17.
  */
 public interface IDao<T>{
-     Long save(T t);
-     T update(T t);
-     List<T>findByExample(T t);
+     GenericEntity save(GenericEntity t);
+     GenericEntity update(T t);
+     List<GenericEntity>findByExample(T t);
      Boolean delete(T t);
      Boolean deleteById(Long id);
 

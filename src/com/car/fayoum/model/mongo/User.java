@@ -4,6 +4,9 @@ package com.car.fayoum.model.mongo;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by ahmedissawi on 12/6/17.
@@ -20,47 +23,91 @@ public class User extends  GenericEntity{
     private Boolean status;
     private Integer permissions;
     private Integer userType;
+    private String loginName;
 
+    private List<Permission>permissionList=new ArrayList<>();
 
-
+    public User id(Long id) {
+        this.id=id;
+        return this;
+    }
+    public static User instance(){
+        return new User();
+    }
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+
+    public User userName(String userName) {
         this.userName = userName;
+        return this;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public User loginName(String loginName) {
+        this.loginName = loginName;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User password(String password) {
         this.password = password;
+        return this;
     }
 
     public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public User status(Boolean status) {
         this.status = status;
+        return this;
     }
 
     public Integer getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Integer permissions) {
+    public User permissions(Integer permissions) {
         this.permissions = permissions;
+        this.permissionList=Permission.getPermissions(permissions);
+        return this;
     }
 
     public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public User userType(Integer userType) {
         this.userType = userType;
+        return this;
+    }
+    public List<Permission> getPermissionList(Integer permissions){
+         return permissionList;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("User{");
+        sb.append("userName='").append(userName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", permissions=").append(permissions);
+        sb.append(", userType=").append(userType);
+        sb.append(", loginName='").append(loginName).append('\'');
+        sb.append(", permissions='").append(permissionList.toString()).append('\'');
+
+        sb.append(",").append(super.toString()).append('\'');
+
+        sb.append('}');
+        return sb.toString();
     }
 
     public String getCollectionName(){
