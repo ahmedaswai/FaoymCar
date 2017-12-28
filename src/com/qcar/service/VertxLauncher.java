@@ -24,12 +24,13 @@ public class VertxLauncher extends AbstractVerticle {
         Router mainRouter = Router.router(vertx);
 
 
-        mainRouter.route().failureHandler(HandlerFactory.errorHandler());
+
 
         UserService service = new UserService();
 
         service.registerHandler(mainRouter);
 
+        mainRouter.route().failureHandler(HandlerFactory.errorHandler());
 
         server.requestHandler(mainRouter::accept);
 
@@ -38,7 +39,7 @@ public class VertxLauncher extends AbstractVerticle {
             if (rs.succeeded()) {
                 startFuture.complete();
             } else {
-                startFuture.fail(rs.cause());
+               startFuture.fail(rs.cause());
             }
         }));
 

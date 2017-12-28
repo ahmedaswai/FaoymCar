@@ -3,10 +3,12 @@ package com.qcar.service;
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.UserDao;
 import com.qcar.handler.HandlerFactory;
+import com.qcar.handler.LoginResult;
 import com.qcar.handler.UserHandler;
 import com.qcar.model.mongo.User;
 import com.qcar.model.mongo.service.ServiceReturnSingle;
 import com.qcar.model.mongo.service.exception.QCarException;
+import com.qcar.model.mongo.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
@@ -31,22 +33,33 @@ public class UserService implements IService {
                 .produces(MediaType.APPLICATION_JSON)
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
-                .handler(routingContext -> {
 
-                            JsonObject login = routingContext.getBodyAsJson();
+                .handler(ctx -> {
+
+                            JsonObject login = ctx.getBodyAsJson();
+
                             String password = login.getString("password");
                             String userName = login.getString("userName");
 
-                            boolean status = userHandler.doLogin(userName, password);
-                            if (!status) {
-                                routingContext.fail(new QCarException("User is not available"));
+                           LoginResult rs= userHandler.doLogin(ctx,userName, password);
 
-                            }
+                           switch (rs){
 
-                            routingContext.response()
-                                    .putHeader("content-type", MediaType.APPLICATION_JSON)
-                                    .setStatusCode(200).
-                                    end(ServiceReturnSingle.response(status));
+                               case INVALID_USER_NAME:
+                                   ctx.fail(new QCarSecurityException("Invalid User Name"));
+                                   break;
+                               case INVALID_PASSWORD:
+                                   ctx.fail(new QCarSecurityException("Invalid Password"));
+                                   break;
+                               case LOGIN_SUCCESS:
+                                   ctx.response()
+                                           .putHeader("content-type", MediaType.APPLICATION_JSON)
+                                           .setStatusCode(200).
+                                           end(ServiceReturnSingle.response(true));
+                                   break;
+                           }
+
+
                         }
                 );
 
@@ -59,7 +72,6 @@ public class UserService implements IService {
                             Long id = Long.parseLong(routingContext.request().getParam("id"));
 
                             User u = dao.findUserById(id);
-
 
                             routingContext.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 

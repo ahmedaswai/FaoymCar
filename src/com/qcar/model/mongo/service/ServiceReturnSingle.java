@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.Json;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by ahmedissawi on 12/28/17.
  */
@@ -38,7 +40,7 @@ public class ServiceReturnSingle<T> {
     public static final Buffer response(Object t) {
         ServiceReturnSingle returnSingle = new ServiceReturnSingle();
         returnSingle.result = t;
-        returnSingle.statusCode = 200;
+        returnSingle.statusCode = HttpsURLConnection.HTTP_OK;
         return Json.encodeToBuffer(returnSingle);
     }
 }
