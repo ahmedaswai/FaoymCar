@@ -11,12 +11,12 @@ import java.util.List;
 public class OrderDao extends GenericDao<Order> implements IDao<Order> {
 
     @Override
-    public Order update(Order order) {
+    public GenericEntity update(Order order) {
         return null;
     }
 
     @Override
-    public List<Order> findByExample(Order order) {
+    public List<GenericEntity> findByExample(Order order) {
         return null;
     }
 
