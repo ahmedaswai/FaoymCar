@@ -7,6 +7,8 @@ import com.qcar.model.mongo.service.ServiceReturnSingle;
 import com.qcar.model.mongo.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
 import com.qcar.utils.SecurityUtils;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
@@ -18,6 +20,32 @@ import java.util.Optional;
 public class UserHandler {
 
 
+    public void findUserById(RoutingContext ctx){
+
+        final UserDao dao = DaoFactory.getUserDao();
+            Long id = Long.parseLong(ctx.request().getParam("id"));
+
+            User u = dao.findUserById(id);
+
+            ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                    .setStatusCode(200).end(Json.encodeToBuffer(u));
+
+
+    }
+    public void doAddUser(RoutingContext ctx){
+
+
+        final UserDao dao = DaoFactory.getUserDao();
+            User user = Json.decodeValue(ctx.getBody(), User.class);
+            Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
+            ctx.response().
+                    putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                    .setStatusCode(200).end(rs);
+
+
+    }
     public void doLogin(RoutingContext ctx) {
         JsonObject login = ctx.getBodyAsJson();
 

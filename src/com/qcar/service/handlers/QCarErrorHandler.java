@@ -6,6 +6,8 @@ import com.qcar.model.mongo.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.ErrorHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
 
@@ -14,6 +16,8 @@ import java.net.HttpURLConnection;
  */
 public class    QCarErrorHandler implements ErrorHandler {
 
+
+    private final Logger logger= LoggerFactory.getLogger(QCarErrorHandler.class);
 
     @Override
     public void handle(RoutingContext ctx) {
@@ -31,6 +35,9 @@ public class    QCarErrorHandler implements ErrorHandler {
              ex = (QCarException) ex;
             errorCode=HttpURLConnection.HTTP_INTERNAL_ERROR;
         }
+
+
+        logger.error("Exception",ex);
 
         ctx.response()
                 .putHeader("content-type", MediaType.APPLICATION_JSON)

@@ -16,9 +16,12 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
     public static final String ID = "id";
 
 
+
+
+
     public Datastore getDataStore() {
 
-        return DatabaseClient.INSTANCE.connect().db("qa-car").startScanning("com.qcar.model.mongo").
+       return DatabaseClient.INSTANCE.connect().db("qa-car").startScanning("com.qcar.model.mongo").
                 datastore();
 
     }

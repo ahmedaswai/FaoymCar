@@ -41,17 +41,7 @@ public class UserCtrl implements IService {
                 .path(getRoute() + "/id/:id")
                 .produces(MediaType.APPLICATION_JSON)
 
-                .handler(routingContext -> {
-
-                            Long id = Long.parseLong(routingContext.request().getParam("id"));
-
-                            User u = dao.findUserById(id);
-
-                            routingContext.response().putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                                    .setStatusCode(200).end(Json.encodeToBuffer(u));
-                        }
-                );
+                .handler(userHandler::findUserById);
 
 
         mainRouter.post()
@@ -59,17 +49,14 @@ public class UserCtrl implements IService {
                 .produces(MediaType.APPLICATION_JSON)
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
-                .handler(ctx -> {
+                .handler(userHandler::doAddUser);
 
-
-                            User user = Json.decodeValue(ctx.getBody(), User.class);
-                            Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
-                            ctx.response().
-                                    putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                                    .setStatusCode(200).end(rs);
-                        }
-                );
+        mainRouter.put()
+                .path(getRoute())
+                .produces(MediaType.APPLICATION_JSON)
+                .consumes(MediaType.APPLICATION_JSON)
+                .handler(BodyHandler.create())
+                .handler(userHandler::doAddUser);
 
     }
 

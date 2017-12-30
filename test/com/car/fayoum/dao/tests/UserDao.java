@@ -31,8 +31,7 @@ public class UserDao {
     public void test1() throws Exception {
 
         User u= User.instance().
-                password(SecurityUtils.hashPassword("sss")).
-                permissions(33).userName("احمد خميس").
+                password(SecurityUtils.hashPassword("sss")).userName("احمد خميس").
                 status(true).loginName("bmind");
 
         dao.save(u);
@@ -61,7 +60,7 @@ public class UserDao {
     public void test5() throws Exception {
 
         User user = dao.findUserByLoginName("bmind").get();
-        user.permissions(31);
+
         dao.saveOrMerge(user);
 
         assertNotNull(user);
@@ -75,7 +74,7 @@ public class UserDao {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         User u = User.instance().
                 password(SecurityUtils.hashPassword("sss")).
-                permissions(33).userName("احمد خميس").
+                userName("احمد خميس").
                 status(true).loginName("bmind");
         String json = mapper.writeValueAsString(u);
 

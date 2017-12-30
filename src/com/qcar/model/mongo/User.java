@@ -23,7 +23,7 @@ public class User extends GenericEntity {
     private String userName;
     private String password;
     private Boolean status;
-    private Integer permissions;
+
     private Integer userType;
     private String loginName;
     private Boolean currentlyLogined;
@@ -76,16 +76,6 @@ public class User extends GenericEntity {
         return this;
     }
 
-    public Integer getPermissions() {
-        return permissions;
-    }
-
-    public User permissions(Integer permissions) {
-        this.permissions = permissions;
-        this.permissionList = Permission.getPermissions(permissions);
-        return this;
-    }
-
     public User currentlyLogined(Boolean currentlyLogined) {
         this.currentlyLogined = currentlyLogined;
 
@@ -115,7 +105,7 @@ public class User extends GenericEntity {
         sb.append("userName='").append(userName).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", status=").append(status);
-        sb.append(", permissions=").append(permissions);
+
         sb.append(", userType=").append(userType);
         sb.append(", loginName='").append(loginName).append('\'');
         sb.append(", permissions='").append(permissionList.toString()).append('\'');

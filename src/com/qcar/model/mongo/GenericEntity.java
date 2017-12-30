@@ -11,8 +11,7 @@ import java.util.Date;
  */
 public abstract class GenericEntity {
     @Id
-    @JsonIgnore
-    private ObjectId mongoId;
+    private String mongoId;
 
     protected Long id;
 
@@ -20,11 +19,11 @@ public abstract class GenericEntity {
     private String clientInfo;
     private Date updatedOn = new Date();
 
-    public ObjectId getMongoId() {
+    public String getMongoId() {
         return mongoId;
     }
 
-    public GenericEntity mongoId(ObjectId mongoId) {
+    public GenericEntity mongoId(String mongoId) {
 
         this.mongoId = mongoId;
         return this;

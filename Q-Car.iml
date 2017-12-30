@@ -13,5 +13,6 @@
     <orderEntry type="library" name="vertx-3.5.0" level="project" />
     <orderEntry type="library" name="Junit" level="project" />
     <orderEntry type="library" name="jbcrypt-0.4" level="project" />
+    <orderEntry type="library" name="logback-classic-1.2.3" level="project" />
   </component>
 </module>
