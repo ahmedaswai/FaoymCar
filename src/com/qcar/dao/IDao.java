@@ -21,11 +21,5 @@ public interface IDao<T extends GenericEntity> {
 
     Boolean deleteById(Long id);
 
-    default Datastore getDataStore() {
-        return DatabaseClient.INSTANCE.
-                startScanning("com.qcar.model.mongo").
-                connect().db("qcar").datastore();
-    }
-
 
 }

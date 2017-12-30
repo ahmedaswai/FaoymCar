@@ -1,12 +1,18 @@
 package com.qcar.service;
 
-import com.qcar.handler.HandlerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import com.qcar.service.handlers.HandlerFactory;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.SLF4JLogDelegateFactory;
 import io.vertx.ext.web.Router;
+
+import static io.vertx.core.logging.LoggerFactory.LOGGER_DELEGATE_FACTORY_CLASS_NAME;
 
 /**
  * Created by ahmedissawi on 12/10/17.
@@ -18,15 +24,22 @@ public class VertxLauncher extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
+
+
+        System.setProperty(LOGGER_DELEGATE_FACTORY_CLASS_NAME, SLF4JLogDelegateFactory.class.getName());
+
+        LoggerContext loggerContext = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
+        Logger rootLogger = loggerContext.getLogger("org.mongodb.driver");
+        rootLogger.setLevel(Level.INFO);
+        //LoggerFactory.getLogger (LoggerFactory.class); // Required for Logback to work in Vertx
+
         HttpServer server = vertx.createHttpServer();
 
 
         Router mainRouter = Router.router(vertx);
 
 
-
-
-        UserService service = new UserService();
+        UserCtrl service = new UserCtrl();
 
         service.registerHandler(mainRouter);
 

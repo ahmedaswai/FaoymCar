@@ -1,4 +1,4 @@
-package com.qcar.handler;
+package com.qcar.service.handlers;
 
 import com.qcar.model.mongo.service.ServiceError;
 import com.qcar.model.mongo.service.exception.QCarException;

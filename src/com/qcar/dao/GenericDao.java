@@ -3,6 +3,7 @@ package com.qcar.dao;
 import com.qcar.model.mongo.GenericEntity;
 import com.qcar.model.mongo.Sequence;
 import com.mongodb.WriteConcern;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
@@ -15,6 +16,12 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
     public static final String ID = "id";
 
 
+    public Datastore getDataStore() {
+
+        return DatabaseClient.INSTANCE.connect().db("qa-car").startScanning("com.qcar.model.mongo").
+                datastore();
+
+    }
     @Override
     public T update(T t) {
         WriteConcern concern = WriteConcern.ACKNOWLEDGED;
@@ -27,6 +34,7 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
     public T saveOrMerge(T t) {
         if (t.getId() == null) {
             setId(t);
+            save(t);
         } else {
             update(t);
         }

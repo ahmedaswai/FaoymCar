@@ -14,6 +14,8 @@ public enum DatabaseClient {
     private MongoClient client;
     private String db;
     private final transient Morphia morphia = new Morphia();
+    private Datastore datastore = null;
+
 
 
     public DatabaseClient startScanning(String m) {
@@ -39,12 +41,20 @@ public enum DatabaseClient {
     }
 
     public Datastore datastore() {
-        morphia.mapPackage(startScanning);
-        Datastore store = morphia.
-                createDatastore(client, db);
-        store.ensureCaps();
-        store.ensureIndexes();
-        return store;
+
+
+        if (datastore == null) {
+            morphia.mapPackage(startScanning);
+            datastore = morphia.
+                    createDatastore(client, db);
+            datastore.ensureCaps();
+            datastore.ensureIndexes();
+
+        }
+        return datastore;
+
+
     }
+
 
 }
