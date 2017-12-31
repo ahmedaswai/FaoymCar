@@ -43,6 +43,12 @@ public class UserCtrl implements IService {
 
                 .handler(userHandler::findUserById);
 
+        mainRouter.get()
+                .path(getRoute())
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(userHandler::findAllUsers);
+
 
         mainRouter.post()
                 .path(getRoute())
@@ -57,6 +63,12 @@ public class UserCtrl implements IService {
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
                 .handler(userHandler::doAddUser);
+
+        mainRouter.delete()
+                .path(getRoute()+"/id/:id")
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(userHandler::doDeleteUser);
 
     }
 

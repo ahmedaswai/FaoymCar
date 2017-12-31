@@ -5,11 +5,13 @@ package com.qcar.model.mongo.service.exception;
  */
 public class QCarSecurityException extends QCarException {
 
-    public QCarSecurityException(String msg) {
-        super(msg);
+    public QCarSecurityException(ErrorCodes errorCode) {
+        super(errorCode);
     }
 
-    public QCarSecurityException(String msg, Throwable throwable) {
-        super(msg, throwable);
+    public QCarSecurityException(String msg, Throwable throwable,ErrorCodes errorCode) {
+
+        super(throwable,errorCode);
     }
+
 }

@@ -22,22 +22,23 @@ public class VertxLauncher extends AbstractVerticle {
 
     private final Vertx vertx = Vertx.vertx();
 
-    @Override
-    public void start(Future<Void> startFuture) throws Exception {
 
-
+    private void initLog(){
         System.setProperty(LOGGER_DELEGATE_FACTORY_CLASS_NAME, SLF4JLogDelegateFactory.class.getName());
-
         LoggerContext loggerContext = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
         Logger rootLogger = loggerContext.getLogger("org.mongodb.driver");
         rootLogger.setLevel(Level.INFO);
-        //LoggerFactory.getLogger (LoggerFactory.class); // Required for Logback to work in Vertx
+    }
+    @Override
+    public void start(Future<Void> startFuture) {
+
+
+
+        initLog();
 
         HttpServer server = vertx.createHttpServer();
 
-
         Router mainRouter = Router.router(vertx);
-
 
         UserCtrl service = new UserCtrl();
 
@@ -46,7 +47,6 @@ public class VertxLauncher extends AbstractVerticle {
         mainRouter.route().failureHandler(HandlerFactory.errorHandler());
 
         server.requestHandler(mainRouter::accept);
-
 
         server.listen(8080, (rs -> {
             if (rs.succeeded()) {
@@ -59,7 +59,7 @@ public class VertxLauncher extends AbstractVerticle {
     }
 
     @Override
-    public void stop(Future<Void> stopFuture) throws Exception {
+    public void stop(Future<Void> stopFuture) {
         vertx.close(res -> vertx.close(stopFuture.completer()));
     }
 

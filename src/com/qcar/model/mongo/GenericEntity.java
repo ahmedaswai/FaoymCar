@@ -10,25 +10,17 @@ import java.util.Date;
  * Created by ahmedissawi on 12/6/17.
  */
 public abstract class GenericEntity {
-    @Id
-    private String mongoId;
 
+
+
+    @Id
     protected Long id;
 
     private Integer updatedBy;
     private String clientInfo;
     private Date updatedOn = new Date();
 
-    public String getMongoId() {
-        return mongoId;
-    }
 
-    public GenericEntity mongoId(String mongoId) {
-
-        this.mongoId = mongoId;
-        return this;
-
-    }
 
     public GenericEntity id(Long id) {
         this.id = id;
@@ -73,7 +65,7 @@ public abstract class GenericEntity {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("");
-        sb.append("mongoId=").append(mongoId);
+
         sb.append(", id=").append(id);
         sb.append(", updatedBy=").append(updatedBy);
         sb.append(", clientInfo='").append(clientInfo).append('\'');
@@ -81,6 +73,7 @@ public abstract class GenericEntity {
 
         return sb.toString();
     }
+
 
     public abstract String getCollectionName();
 

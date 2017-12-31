@@ -1,6 +1,7 @@
 package com.qcar.model.mongo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.mongodb.morphia.annotations.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity("users")
 @Indexes(
         {
-                @Index(value = "id", fields = @Field("id"), options = @IndexOptions(unique = true)),
+                @Index(value = "id", fields = @Field("id")),
                 @Index(value = "loginName", fields = @Field("loginName"), options = @IndexOptions(unique = true))
         }
 )
@@ -22,11 +23,11 @@ public class User extends GenericEntity {
 
     private String userName;
     private String password;
-    private Boolean status;
+    private Boolean status=true;
 
-    private Integer userType;
+    private UserType userType;
     private String loginName;
-    private Boolean currentlyLogined;
+    private Boolean currentlyLogined=false;
 
     private List<Permission> permissionList = new ArrayList<>();
 
@@ -86,11 +87,11 @@ public class User extends GenericEntity {
         return this.currentlyLogined;
     }
 
-    public Integer getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public User userType(Integer userType) {
+    public User userType(UserType userType) {
         this.userType = userType;
         return this;
     }
@@ -116,6 +117,7 @@ public class User extends GenericEntity {
         return sb.toString();
     }
 
+    @JsonIgnore
     public String getCollectionName() {
         return "users";
     }

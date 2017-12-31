@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
-
+import io.vertx.core.buffer.Buffer;
 /**
  * Created by ahmedissawi on 12/28/17.
  */
@@ -26,14 +26,21 @@ public class    QCarErrorHandler implements ErrorHandler {
         int errorCode=HttpURLConnection.HTTP_INTERNAL_ERROR;
         Exception ex=(Exception)throwable;
 
+        Buffer bf;
         if (ex instanceof QCarSecurityException) {
-            ex = (QCarSecurityException) ex;
+            QCarSecurityException e = (QCarSecurityException) ex;
             errorCode=HttpURLConnection.HTTP_UNAUTHORIZED;
+            bf=ServiceError.response(ex,e.getErrorCode());
 
         }
         else if (ex instanceof QCarException) {
              ex = (QCarException) ex;
             errorCode=HttpURLConnection.HTTP_INTERNAL_ERROR;
+            QCarException e = (QCarException) ex;
+            bf=ServiceError.response(ex,e.getErrorCode());
+        }
+        else{
+            bf=ServiceError.response(ex);
         }
 
 
@@ -42,8 +49,7 @@ public class    QCarErrorHandler implements ErrorHandler {
         ctx.response()
                 .putHeader("content-type", MediaType.APPLICATION_JSON)
                 .setStatusCode(errorCode).
-                end(
-                ServiceError.response(ex.getMessage()));
+                end(bf);
 
 
 

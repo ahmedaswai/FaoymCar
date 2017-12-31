@@ -7,6 +7,8 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import java.util.List;
+
 /**
  * Created by ahmedissawi on 12/8/17.
  */
@@ -14,7 +16,6 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
 
     public static final String ID = "id";
-
 
 
 
@@ -33,6 +34,7 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
         return t;
     }
 
+
     @Override
     public T saveOrMerge(T t) {
         if (t.getId() == null) {
@@ -44,7 +46,7 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
         return t;
     }
 
-    public void setId(T entity) {
+    protected void setId(T entity) {
 
         if (entity.getId() == null) {
             String entityName = entity.getCollectionName();

@@ -1,5 +1,6 @@
 package com.qcar.model.mongo.service;
 
+import com.qcar.model.mongo.service.exception.ErrorCodes;
 import com.qcar.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.buffer.Buffer;
@@ -16,6 +17,9 @@ public class ServiceError {
     @JsonProperty("v")
     private String version = Constants.VERSION;
 
+    @JsonProperty("ec")
+    private ErrorCodes errorCode;
+
     @JsonProperty("ms")
     private String errorMessage;
 
@@ -27,13 +31,25 @@ public class ServiceError {
         return version;
     }
 
+    public ErrorCodes getErrorCode() {
+        return errorCode;
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }
 
-    public static final Buffer response(String ms) {
+    public static final Buffer response(Throwable e, ErrorCodes errorCode) {
         ServiceError returnSingle = new ServiceError();
-        returnSingle.errorMessage = ms;
+        returnSingle.errorCode = errorCode;
+        returnSingle.errorMessage=e.getMessage();
+        returnSingle.statusCode = 500;
+        return Json.encodeToBuffer(returnSingle);
+    }
+    public static final Buffer response(Throwable e) {
+        ServiceError returnSingle = new ServiceError();
+
+        returnSingle.errorMessage=e.getMessage();
         returnSingle.statusCode = 500;
         return Json.encodeToBuffer(returnSingle);
     }

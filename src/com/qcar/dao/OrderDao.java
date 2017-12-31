@@ -15,6 +15,11 @@ public class OrderDao extends GenericDao<Order> implements IDao<Order> {
     }
 
     @Override
+    public Order saveOrMerge(Order order) {
+        return null;
+    }
+
+    @Override
     public List<Order> findByExample(Order order) {
         return null;
     }

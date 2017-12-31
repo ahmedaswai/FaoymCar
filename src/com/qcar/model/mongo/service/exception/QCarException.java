@@ -5,11 +5,19 @@ package com.qcar.model.mongo.service.exception;
  */
 public class QCarException extends RuntimeException {
 
-    public QCarException(String msg) {
-        super(msg);
+    private final ErrorCodes errorCode;
+    public QCarException(ErrorCodes errorCode) {
+
+        super(errorCode.getErrorMessage());
+        this.errorCode=errorCode;
     }
 
-    public QCarException(String msg, Throwable throwable) {
-        super(msg, throwable);
+    public QCarException(Throwable throwable,ErrorCodes errorCode) {
+        super(errorCode.getErrorMessage());
+        this.errorCode=errorCode;
+    }
+
+    public ErrorCodes getErrorCode() {
+        return errorCode;
     }
 }

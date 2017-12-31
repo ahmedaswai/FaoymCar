@@ -3,7 +3,9 @@ package com.qcar.service.handlers;
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.UserDao;
 import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.service.ServiceReturnList;
 import com.qcar.model.mongo.service.ServiceReturnSingle;
+import com.qcar.model.mongo.service.exception.ErrorCodes;
 import com.qcar.model.mongo.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
 import com.qcar.utils.SecurityUtils;
@@ -12,6 +14,7 @@ import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,10 +29,25 @@ public class UserHandler {
             Long id = Long.parseLong(ctx.request().getParam("id"));
 
             User u = dao.findUserById(id);
-
+            Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(u));
             ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 
-                    .setStatusCode(200).end(Json.encodeToBuffer(u));
+                    .setStatusCode(200).end(rs);
+
+
+    }
+    public void findAllUsers(RoutingContext ctx){
+
+        final UserDao dao = DaoFactory.getUserDao();
+
+
+        List<User> lst = dao.findAll();
+
+        Buffer rs = ServiceReturnList.response(lst);
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
 
 
     }
@@ -38,11 +56,28 @@ public class UserHandler {
 
         final UserDao dao = DaoFactory.getUserDao();
             User user = Json.decodeValue(ctx.getBody(), User.class);
+            String hashedPassword=SecurityUtils.hashPassword(user.getPassword());
+            user.password(hashedPassword);
+
             Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
             ctx.response().
                     putHeader("content-type", MediaType.APPLICATION_JSON)
 
                     .setStatusCode(200).end(rs);
+
+
+    }
+    public void doDeleteUser(RoutingContext ctx){
+
+
+        final UserDao dao = DaoFactory.getUserDao();
+        Long id = Long.parseLong(ctx.request().getParam("id"));
+        Buffer rs = ServiceReturnSingle.response(dao.deleteById(id));
+
+        ctx.response().
+                putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
 
 
     }
@@ -57,10 +92,10 @@ public class UserHandler {
         switch (rs) {
 
             case INVALID_USER_NAME:
-                ctx.fail(new QCarSecurityException("Invalid User Name"));
+                ctx.fail(new QCarSecurityException(ErrorCodes.USER_NOT_FOUND));
                 break;
             case INVALID_PASSWORD:
-                ctx.fail(new QCarSecurityException("Invalid Password"));
+                ctx.fail(new QCarSecurityException(ErrorCodes.INVALID_PASSWORD));
                 break;
             case LOGIN_SUCCESS:
                 ctx.response()

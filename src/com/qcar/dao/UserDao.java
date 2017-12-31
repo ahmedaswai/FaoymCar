@@ -4,6 +4,7 @@ import com.qcar.model.mongo.User;
 import com.qcar.utils.CollectionUtils;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,10 @@ public class UserDao extends GenericDao<User> implements IDao<User> {
 
     @Override
     public Boolean deleteById(Long id) {
-        return null;
+        Query query = getDataStore().
+                createQuery(User.class).field(ID).
+                equal(id);
+        return getDataStore().findAndDelete(query)!=null;
     }
 
 
@@ -48,6 +52,12 @@ public class UserDao extends GenericDao<User> implements IDao<User> {
         return count > 0;
     }
 
+
+    public List<User>findAll(){
+        Query<User> query = getDataStore().
+                createQuery(User.class);
+        return query.asList();
+    }
     public Optional<User> findUserByLoginName(String user) {
 
         User u = null;
