@@ -2,7 +2,7 @@ package com.qcar.utils;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-public class SecurityUtils {
+public final class SecurityUtils {
     // The higher the number of iterations the more
     // expensive computing the hash is for us and
     // also for an attacker.
@@ -10,20 +10,19 @@ public class SecurityUtils {
 
 
     public static String hashPassword(String plainPassword) {
-        String salt = BCrypt.gensalt();
+        String salt = BCrypt.gensalt(ITERATIONS);
         String hashed_password = BCrypt.hashpw(plainPassword, salt);
 
         return hashed_password;
     }
 
     public static boolean checkPassword(String plainPassword, String storedHash) {
-        boolean password_verified = false;
 
         if (null == storedHash || !storedHash.startsWith("$2a$"))
             throw new IllegalArgumentException("Invalid hash provided for comparison");
 
-        password_verified = BCrypt.checkpw(plainPassword, storedHash);
+        return BCrypt.checkpw(plainPassword, storedHash);
 
-        return password_verified;
+
     }
 }

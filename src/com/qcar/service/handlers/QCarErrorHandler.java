@@ -17,6 +17,7 @@ import io.vertx.core.buffer.Buffer;
 public class    QCarErrorHandler implements ErrorHandler {
 
 
+     QCarErrorHandler(){}
     private final Logger logger= LoggerFactory.getLogger(QCarErrorHandler.class);
 
     @Override

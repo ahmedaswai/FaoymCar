@@ -1,4 +1,4 @@
-package com.qcar.service.handlers;
+package com.qcar.model.mongo.service;
 
 public enum LoginResult {
 

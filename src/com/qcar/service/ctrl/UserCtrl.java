@@ -1,17 +1,11 @@
-package com.qcar.service;
+package com.qcar.service.ctrl;
 
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.UserDao;
+import com.qcar.service.ICtrl;
 import com.qcar.service.handlers.HandlerFactory;
-import com.qcar.service.handlers.LoginResult;
 import com.qcar.service.handlers.UserHandler;
-import com.qcar.model.mongo.User;
-import com.qcar.model.mongo.service.ServiceReturnSingle;
-import com.qcar.model.mongo.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
-import io.vertx.core.buffer.Buffer;
-import io.vertx.core.json.Json;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
@@ -19,10 +13,13 @@ import io.vertx.ext.web.handler.BodyHandler;
 /**
  * Created by ahmedissawi on 12/27/17.
  */
-public class UserCtrl implements IService {
+public class UserCtrl implements ICtrl {
 
     private final UserDao dao = DaoFactory.getUserDao();
 
+     UserCtrl(){
+
+    }
     @Override
     public void registerHandler(Router mainRouter) {
 
@@ -37,11 +34,31 @@ public class UserCtrl implements IService {
 
                 .handler(userHandler::doLogin);
 
+        mainRouter.post()
+                .path(getRoute() + "/password/reset")
+                .produces(MediaType.APPLICATION_JSON)
+                .consumes(MediaType.APPLICATION_JSON)
+                .handler(BodyHandler.create())
+
+                .handler(userHandler::doResetPassword);
+
         mainRouter.get()
                 .path(getRoute() + "/id/:id")
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(userHandler::findUserById);
+
+        mainRouter.get()
+                .path(getRoute() + "/permissions")
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(userHandler::findAllPermissions);
+
+        mainRouter.get()
+                .path(getRoute() + "/login/:loginName")
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(userHandler::findUserByLoginName);
 
         mainRouter.get()
                 .path(getRoute())
@@ -69,6 +86,13 @@ public class UserCtrl implements IService {
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(userHandler::doDeleteUser);
+
+        mainRouter.delete()
+                .path(getRoute()+"/bulk")
+                .produces(MediaType.APPLICATION_JSON)
+                .consumes(MediaType.APPLICATION_JSON)
+                .handler(BodyHandler.create())
+                .handler(userHandler::doDeleteUserBulk);
 
     }
 

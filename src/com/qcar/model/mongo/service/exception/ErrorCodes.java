@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ErrorCodes {
 
-    USER_NOT_FOUND(1000,"User Not Found"),INVALID_PASSWORD(1001,"Invalid Password");
+    USER_NOT_FOUND(1000,"User Not Found"),
+    INVALID_PASSWORD(1001,"Invalid Password"),
+    PASSWORD_RESET_IS_SAME(1002,"Can not reset password with the same password");
 
     private final int errorCode;
     private final String errorMessage;
