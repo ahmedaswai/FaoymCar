@@ -63,7 +63,7 @@ public class VertxLauncher extends AbstractVerticle {
 
         Router mainRouter = Router.router(vertx);
 
-        enableCors(mainRouter);
+       enableCors(mainRouter);
 
         initSecurityHandler(mainRouter);
         initCtrls(mainRouter);

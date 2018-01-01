@@ -23,6 +23,9 @@ public class ServiceError {
     @JsonProperty("ms")
     private String errorMessage;
 
+    @JsonProperty("lm")
+    private String logMessage;
+
     public Integer getStatusCode() {
         return statusCode;
     }
@@ -42,15 +45,24 @@ public class ServiceError {
     public static final Buffer response(Throwable e, ErrorCodes errorCode) {
         ServiceError returnSingle = new ServiceError();
         returnSingle.errorCode = errorCode;
-        returnSingle.errorMessage=e.getMessage();
+        returnSingle.logMessage=e.getMessage();
+
         returnSingle.statusCode = 500;
+
         return Json.encodeToBuffer(returnSingle);
     }
+
+    public String getLogMessage() {
+        return logMessage;
+    }
+
     public static final Buffer response(Throwable e) {
         ServiceError returnSingle = new ServiceError();
 
-        returnSingle.errorMessage=e.getMessage();
+        returnSingle.errorCode=ErrorCodes.UN_DEFINED_EXCEPTION;
         returnSingle.statusCode = 500;
+        returnSingle.logMessage=e.getMessage();
+        returnSingle.errorMessage=ErrorCodes.UN_DEFINED_EXCEPTION.getErrorMessage();
         return Json.encodeToBuffer(returnSingle);
     }
 }

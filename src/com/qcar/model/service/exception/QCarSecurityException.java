@@ -9,7 +9,7 @@ public class QCarSecurityException extends QCarException {
         super(errorCode);
     }
 
-    public QCarSecurityException(String msg, Throwable throwable,ErrorCodes errorCode) {
+    public QCarSecurityException(Throwable throwable,ErrorCodes errorCode) {
 
         super(throwable,errorCode);
     }

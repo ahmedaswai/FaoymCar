@@ -6,6 +6,7 @@ package com.qcar.model.service.exception;
 public class QCarException extends RuntimeException {
 
     private final ErrorCodes errorCode;
+
     public QCarException(ErrorCodes errorCode) {
 
         super(errorCode.getErrorMessage());
@@ -13,11 +14,14 @@ public class QCarException extends RuntimeException {
     }
 
     public QCarException(Throwable throwable,ErrorCodes errorCode) {
-        super(errorCode.getErrorMessage());
+
+        super(throwable.getMessage());
         this.errorCode=errorCode;
+
     }
 
     public ErrorCodes getErrorCode() {
         return errorCode;
     }
+
 }

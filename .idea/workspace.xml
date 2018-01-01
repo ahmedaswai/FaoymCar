@@ -2,28 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcf311ff-9cd7-4460-a78c-9b33b9fb8cbf" name="Default" comment="Adding new Version">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ClientInfo.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/GenericHandler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Q-Car.iml" afterPath="$PROJECT_DIR$/Q-Car.iml" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/dao/GenericDao.java" afterPath="$PROJECT_DIR$/src/com/qcar/dao/GenericDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/GenericEntity.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/mongo/GenericEntity.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/LoginResult.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/LoginResult.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceError.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceReturnList.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceReturnList.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceReturnMap.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceReturnMap.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceReturnSingle.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceReturnSingle.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/ErrorCodes.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/QCarException.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/QCarSecurityException.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java" />
       <change beforePath="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/HandlerFactory.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/HandlerFactory.java" />
       <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/SecurityUtils.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/SecurityUtils.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java" />
     </list>
     <ignored path="Fayoum-Car.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,46 +42,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserHandler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="129" column="44" lean-forward="false" selection-start-line="129" selection-start-column="44" selection-end-line="129" selection-end-column="44" />
-              <folding>
-                <element signature="docComment;class#UserHandler#0" expanded="false" />
-                <element signature="method#findUserByLoginName#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#findAllPermissions#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#findUserById#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#findAllUsers#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#doAddUser#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#doDeleteUser#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#doDeleteUserBulk#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#doLogin#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#doResetPassword#0;class#UserHandler#0" expanded="false" />
-                <element signature="method#checkLogin#0;class#UserHandler#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SecurityUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/SecurityUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SecurityHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="300">
+              <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,10 +67,35 @@
       <file leaf-file-name="JwtTokenUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+            <state relative-caret-position="298">
+              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QCarSecurityException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="51" lean-forward="true" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+              <folding>
+                <element signature="e#205#206#0" expanded="true" />
+                <element signature="e#237#238#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,8 +104,8 @@
       <file leaf-file-name="JwtParser.class" pinned="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/lib/jjwt/jjwt-0.9.0.jar!/io/jsonwebtoken/JwtParser.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="51" column="24" lean-forward="false" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="46" />
+            <state relative-caret-position="417">
+              <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
               <folding>
                 <marker date="1514822956000" expanded="false" signature="3:117" ph="/.../" />
               </folding>
@@ -122,54 +113,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Handler.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/vert.x/vertx-core-3.5.0.jar!/io/vertx/core/Handler.class">
+      <file leaf-file-name="QCarErrorHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="228">
+              <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QCarException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
               <folding>
-                <marker date="1512932119000" expanded="false" signature="3:117" ph="/.../" />
+                <element signature="e#509#510#0" expanded="true" />
+                <element signature="e#541#542#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HandlerFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/HandlerFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VertxLauncher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="67" column="38" lean-forward="false" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserCtrl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserCtrl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-714">
+            <state relative-caret-position="330">
               <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Route.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/vertx-web-3.5.0-sources.jar!/io/vertx/ext/web/Route.java">
+      <file leaf-file-name="ServiceError.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="144" column="8" lean-forward="false" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="414">
+              <caret line="64" column="84" lean-forward="false" selection-start-line="64" selection-start-column="84" selection-end-line="64" selection-end-column="84" />
+              <folding>
+                <element signature="e#1257#1258#0" expanded="true" />
+                <element signature="e#1290#1291#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,10 +181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/car/fayoum/model/mongo/service/ServiceReturnSingle.java" />
-        <option value="$PROJECT_DIR$/src/com/car/fayoum/service/FayoumErrorHandler.java" />
-        <option value="$PROJECT_DIR$/src/com/car/fayoum/model/mongo/service/ServiceError.java" />
-        <option value="$PROJECT_DIR$/src/com/car/fayoum/model/mongo/service/exception/FayoumException.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/model/mongo/service/FayoumErrorHandler.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/handler/FayoumErrorHandler.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/handler/HandlerFactory.java" />
@@ -227,13 +208,10 @@
         <option value="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceReturnMap.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/UserCtrl.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/utils/CollectionUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" />
-        <option value="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/utils/MediaType.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/IService.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/ICtrl.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/ctrl/CtrlFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/ErrorCodes.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/com/qcar/dao/GenericDao.java" />
@@ -244,9 +222,16 @@
         <option value="$PROJECT_DIR$/src/com/qcar/model/service/ClientInfo.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/handlers/HandlerFactory.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java" />
-        <option value="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" />
-        <option value="$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" />
       </list>
     </option>
   </component>
@@ -1011,7 +996,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1022,7 +1006,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32933334" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1085,8 +1069,14 @@
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java</url>
+          <line>20</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="32" />
+      <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1095,14 +1085,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/ServiceReturnList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="48" column="10" lean-forward="false" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/mongodb/bson-3.6.0.jar!/org/bson/types/ObjectId.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-252">
@@ -1439,40 +1421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="38" lean-forward="false" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-          <folding>
-            <element signature="e#543#544#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
-          <folding>
-            <element signature="e#735#736#0" expanded="false" />
-            <element signature="e#767#768#0" expanded="false" />
-            <element signature="e#806#807#0" expanded="false" />
-            <element signature="e#841#842#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="47" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-          <folding>
-            <element signature="e#205#206#0" expanded="false" />
-            <element signature="e#237#238#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/ServiceReturnSingle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -1536,22 +1484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/CollectionUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1568,14 +1500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1701,14 +1625,6 @@
             <marker date="1512932091000" expanded="true" signature="6330:6353" ph="{}" />
             <marker date="1512932091000" expanded="true" signature="6388:6411" ph="{}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1907,57 +1823,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714">
-          <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="67" column="38" lean-forward="false" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/HandlerFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jjwt/jjwt-0.9.0.jar!/io/jsonwebtoken/JwtParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="51" column="24" lean-forward="false" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="46" />
-          <folding>
-            <marker date="1514822956000" expanded="false" signature="3:117" ph="/.../" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1978,6 +1848,155 @@
             <element signature="method#doResetPassword#0;class#UserHandler#0" expanded="false" />
             <element signature="method#checkLogin#0;class#UserHandler#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jjwt/jjwt-0.9.0.jar!/io/jsonwebtoken/impl/DefaultJwtParser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding>
+            <marker date="1514822956000" expanded="false" signature="3:117" ph="/.../" />
+            <marker date="1514822956000" expanded="true" signature="804:827" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="907:930" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1008:1031" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1113:1136" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1216:1239" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1309:1332" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1416:1439" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1521:1544" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1643:1666" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1743:1766" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1846:1869" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="1934:1957" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2050:2073" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2149:2172" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2288:2311" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2445:2468" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2520:2543" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2722:2745" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="2849:2872" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3026:3049" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3257:3280" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3403:3426" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3549:3572" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3672:3695" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3795:3818" ph="{}" />
+            <marker date="1514822956000" expanded="true" signature="3915:3938" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="65" column="7" lean-forward="false" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/ErrorCodes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/ServiceError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="64" column="84" lean-forward="false" selection-start-line="64" selection-start-column="84" selection-end-line="64" selection-end-column="84" />
+          <folding>
+            <element signature="e#1257#1258#0" expanded="true" />
+            <element signature="e#1290#1291#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jjwt/jjwt-0.9.0.jar!/io/jsonwebtoken/JwtParser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+          <folding>
+            <marker date="1514822956000" expanded="false" signature="3:117" ph="/.../" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/JwtTokenUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/handlers/SecurityHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarSecurityException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="51" lean-forward="true" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+          <folding>
+            <element signature="e#205#206#0" expanded="true" />
+            <element signature="e#237#238#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/model/service/exception/QCarException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+          <folding>
+            <element signature="e#509#510#0" expanded="true" />
+            <element signature="e#541#542#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,6 +1,7 @@
 package com.qcar.service.handlers;
 
 import com.qcar.model.service.ServiceError;
+import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarException;
 import com.qcar.model.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
@@ -35,13 +36,14 @@ public class    QCarErrorHandler implements ErrorHandler {
 
         }
         else if (ex instanceof QCarException) {
-             ex = (QCarException) ex;
+            ex = (QCarException) ex;
             errorCode=HttpURLConnection.HTTP_INTERNAL_ERROR;
             QCarException e = (QCarException) ex;
             bf=ServiceError.response(ex,e.getErrorCode());
         }
         else{
-            bf=ServiceError.response(ex);
+
+            bf=ServiceError.response(new QCarException(ex, ErrorCodes.UN_DEFINED_EXCEPTION));
         }
 
 
