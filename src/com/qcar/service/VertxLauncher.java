@@ -6,6 +6,7 @@ import ch.qos.logback.classic.LoggerContext;
 import com.qcar.service.ctrl.CtrlFactory;
 import com.qcar.service.ctrl.UserCtrl;
 import com.qcar.service.handlers.HandlerFactory;
+import com.qcar.service.handlers.SecurityHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -43,7 +44,13 @@ public class VertxLauncher extends AbstractVerticle {
     private void initCtrls(Router router){
         UserCtrl service = CtrlFactory.userCtrl();
 
+
+
         service.registerHandler(router);
+    }
+    private void initSecurityHandler(Router router){
+        SecurityHandler handler=HandlerFactory.securityHandler();
+        router.route("/api/*").handler(handler);
     }
     @Override
     public void start(Future<Void> startFuture) {
@@ -57,6 +64,8 @@ public class VertxLauncher extends AbstractVerticle {
         Router mainRouter = Router.router(vertx);
 
         enableCors(mainRouter);
+
+        initSecurityHandler(mainRouter);
         initCtrls(mainRouter);
 
         mainRouter.route().failureHandler(HandlerFactory.errorHandler());

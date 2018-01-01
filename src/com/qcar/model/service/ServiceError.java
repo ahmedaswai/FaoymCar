@@ -1,6 +1,6 @@
-package com.qcar.model.mongo.service;
+package com.qcar.model.service;
 
-import com.qcar.model.mongo.service.exception.ErrorCodes;
+import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.buffer.Buffer;

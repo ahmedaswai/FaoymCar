@@ -1,8 +1,8 @@
 package com.qcar.service.handlers;
 
-import com.qcar.model.mongo.service.ServiceError;
-import com.qcar.model.mongo.service.exception.QCarException;
-import com.qcar.model.mongo.service.exception.QCarSecurityException;
+import com.qcar.model.service.ServiceError;
+import com.qcar.model.service.exception.QCarException;
+import com.qcar.model.service.exception.QCarSecurityException;
 import com.qcar.utils.MediaType;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.ErrorHandler;

@@ -15,7 +15,7 @@ import io.vertx.ext.web.handler.BodyHandler;
  */
 public class UserCtrl implements ICtrl {
 
-    private final UserDao dao = DaoFactory.getUserDao();
+
 
      UserCtrl(){
 
@@ -27,7 +27,7 @@ public class UserCtrl implements ICtrl {
 
 
         mainRouter.post()
-                .path(getRoute() + "/login")
+                .path("/login")
                 .produces(MediaType.APPLICATION_JSON)
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
@@ -98,6 +98,6 @@ public class UserCtrl implements ICtrl {
 
     @Override
     public String getRoute() {
-        return "/users";
+        return "/api/users";
     }
 }

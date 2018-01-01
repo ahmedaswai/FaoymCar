@@ -1,10 +1,13 @@
 package com.qcar.model.mongo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qcar.model.service.ClientInfo;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ahmedissawi on 12/6/17.
@@ -17,7 +20,7 @@ public abstract class GenericEntity {
     protected Long id;
 
     private Integer updatedBy;
-    private String clientInfo;
+    private ClientInfo clientInfo;
     private Date updatedOn = new Date();
 
 
@@ -42,11 +45,11 @@ public abstract class GenericEntity {
         return this;
     }
 
-    public String getClientInfo() {
+    public ClientInfo getClientInfo() {
         return clientInfo;
     }
 
-    public GenericEntity setClientInfo(String clientInfo) {
+    public GenericEntity setClientInfo(ClientInfo clientInfo) {
 
         this.clientInfo = clientInfo;
         return this;

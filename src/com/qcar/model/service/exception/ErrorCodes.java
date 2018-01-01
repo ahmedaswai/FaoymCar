@@ -1,4 +1,4 @@
-package com.qcar.model.mongo.service.exception;
+package com.qcar.model.service.exception;
 
 
 import com.fasterxml.jackson.annotation.JsonValue;

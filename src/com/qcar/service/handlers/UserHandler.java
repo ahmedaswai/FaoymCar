@@ -4,13 +4,14 @@ import com.qcar.dao.DaoFactory;
 import com.qcar.dao.UserDao;
 import com.qcar.model.mongo.Permission;
 import com.qcar.model.mongo.User;
-import com.qcar.model.mongo.service.LoginResult;
-import com.qcar.model.mongo.service.ServiceReturnList;
-import com.qcar.model.mongo.service.ServiceReturnMap;
-import com.qcar.model.mongo.service.ServiceReturnSingle;
-import com.qcar.model.mongo.service.exception.ErrorCodes;
-import com.qcar.model.mongo.service.exception.QCarSecurityException;
+import com.qcar.model.service.LoginResult;
+import com.qcar.model.service.ServiceReturnList;
+import com.qcar.model.service.ServiceReturnMap;
+import com.qcar.model.service.ServiceReturnSingle;
+import com.qcar.model.service.exception.ErrorCodes;
+import com.qcar.model.service.exception.QCarSecurityException;
 import com.qcar.utils.CollectionUtils;
+import com.qcar.utils.JwtTokenUtil;
 import com.qcar.utils.MediaType;
 import com.qcar.utils.SecurityUtils;
 import io.vertx.core.buffer.Buffer;
@@ -18,6 +19,7 @@ import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,14 +29,16 @@ import java.util.stream.Collectors;
 /**
  * Created by ahmedissawi on 12/28/17.
  */
-public class UserHandler {
+public class UserHandler extends GenericHandler{
 
-     UserHandler(){
-
+    final UserDao dao;
+    UserHandler(){
+           dao = DaoFactory.getUserDao();
     }
 
+
     public void findUserByLoginName(RoutingContext ctx){
-        final UserDao dao = DaoFactory.getUserDao();
+
         String user =ctx.request().getParam("loginName");
 
         User u = dao.findUserByLoginName(user).get();
@@ -53,7 +57,7 @@ public class UserHandler {
     }
     public void findUserById(RoutingContext ctx){
 
-        final UserDao dao = DaoFactory.getUserDao();
+
             Long id = Long.parseLong(ctx.request().getParam("id"));
 
             User u = dao.findUserById(id);
@@ -66,7 +70,7 @@ public class UserHandler {
     }
     public void findAllUsers(RoutingContext ctx){
 
-        final UserDao dao = DaoFactory.getUserDao();
+
 
 
         List<User> lst = dao.findAll();
@@ -82,11 +86,12 @@ public class UserHandler {
     public void doAddUser(RoutingContext ctx){
 
 
-        final UserDao dao = DaoFactory.getUserDao();
+
             User user = Json.decodeValue(ctx.getBody(), User.class);
             String hashedPassword=SecurityUtils.hashPassword(user.getPassword());
             user.password(hashedPassword);
 
+            setClientInfo(user,ctx);
             Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
             ctx.response().
                     putHeader("content-type", MediaType.APPLICATION_JSON)
@@ -98,7 +103,6 @@ public class UserHandler {
     public void doDeleteUser(RoutingContext ctx){
 
 
-        final UserDao dao = DaoFactory.getUserDao();
         Long id = Long.parseLong(ctx.request().getParam("id"));
         Buffer rs = ServiceReturnSingle.response(dao.deleteById(id));
 
@@ -112,7 +116,6 @@ public class UserHandler {
     public void doDeleteUserBulk(RoutingContext ctx){
 
 
-        final UserDao dao = DaoFactory.getUserDao();
         List<Long> ids = Json.decodeValue(ctx.getBody(), CollectionUtils.LONG_LIST_TYPE);
         Map<Long,Boolean> mp=ids.stream().collect(Collectors.toMap(Function.identity(),dao::deleteById));
         Buffer rs = ServiceReturnMap.response(mp);
@@ -141,30 +144,16 @@ public class UserHandler {
                 ctx.fail(new QCarSecurityException(ErrorCodes.INVALID_PASSWORD));
                 break;
             case LOGIN_SUCCESS:
+                Map<String,Object>mp=new HashMap<>();
+                User u=dao.findUserByLoginName(userName).get();
+                mp.put("user",u);
+                mp.put("token", JwtTokenUtil.generateToken(u).get());
                 ctx.response()
                         .putHeader("content-type", MediaType.APPLICATION_JSON)
                         .setStatusCode(200).
-                        end(ServiceReturnSingle.response(true));
+                        end(ServiceReturnMap.response(mp));
                 break;
         }
-
-
-    }
-    private LoginResult checkLogin(String user, String pass) {
-        final UserDao dao = DaoFactory.getUserDao();
-
-        Optional<User> u = dao.findUserByLoginName(user);
-
-        if (u.isPresent()) {
-            boolean status = SecurityUtils.checkPassword(pass, u.get().getPassword());
-            if (!status) {
-                return LoginResult.INVALID_PASSWORD;
-            }
-        } else {
-            return LoginResult.INVALID_USER_NAME;
-        }
-
-        return LoginResult.LOGIN_SUCCESS;
 
 
     }
@@ -187,7 +176,6 @@ public class UserHandler {
             default:
                 break;
         }
-        UserDao dao=DaoFactory.getUserDao();
 
         User u= dao.findUserByLoginName(userName).get();
 
@@ -195,12 +183,31 @@ public class UserHandler {
 
         u.password(newHashedPassword);
 
+        setClientInfo(u,ctx);
         dao.update(u);
 
         ctx.response()
                 .putHeader("content-type", MediaType.APPLICATION_JSON)
                 .setStatusCode(200).
                 end(ServiceReturnSingle.response(true));
+    }
+    private LoginResult checkLogin(String user, String pass) {
+        final UserDao dao = DaoFactory.getUserDao();
+
+        Optional<User> u = dao.findUserByLoginName(user);
+
+        if (u.isPresent()) {
+            boolean status = SecurityUtils.checkPassword(pass, u.get().getPassword());
+            if (!status) {
+                return LoginResult.INVALID_PASSWORD;
+            }
+        } else {
+            return LoginResult.INVALID_USER_NAME;
+        }
+
+        return LoginResult.LOGIN_SUCCESS;
+
+
     }
 
 }

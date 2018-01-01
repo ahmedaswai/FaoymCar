@@ -7,6 +7,7 @@ public class HandlerFactory {
 
     private static transient volatile UserHandler userHandler;
     private static transient volatile QCarErrorHandler errorHandler;
+    private static transient volatile SecurityHandler securityHandler;
 
     public static UserHandler userHandler() {
 
@@ -24,6 +25,14 @@ public class HandlerFactory {
             System.out.println("Creating Instance of UserHandler");
         }
         return errorHandler;
+    }
+    public static SecurityHandler securityHandler() {
+
+        if (securityHandler == null) {
+            securityHandler = new SecurityHandler();
+            System.out.println("Creating Instance of SecurityHandler");
+        }
+        return securityHandler;
     }
 
 }
