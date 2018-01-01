@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcf311ff-9cd7-4460-a78c-9b33b9fb8cbf" name="Default" comment="Adding new Version">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/ServiceReturnMap.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/qcar/service/ctrl/CtrlFactory.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_4.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/morphia.xml" afterPath="$PROJECT_DIR$/.idea/libraries/morphia.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/vertx_3_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/vertx_3_5_0.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/ErrorCodes.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/exception/ErrorCodes.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/IService.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/ICtrl.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/UserCtrl.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/LoginResult.java" afterPath="$PROJECT_DIR$/src/com/qcar/model/mongo/service/LoginResult.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/QCarErrorHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java" afterPath="$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/CollectionUtils.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/CollectionUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/GeneralUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/MediaType.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/MediaType.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/qcar/utils/SecurityUtils.java" afterPath="$PROJECT_DIR$/src/com/qcar/utils/SecurityUtils.java" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="Fayoum-Car.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,11 +103,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserCtrl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserCtrl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
               <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="53" lean-forward="false" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -152,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/car/fayoum/utils/MediaType.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/model/mongo/User.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/dao/OrderDao.java" />
         <option value="$PROJECT_DIR$/src/com/car/fayoum/handler/UserHandler.java" />
@@ -203,6 +195,7 @@
         <option value="$PROJECT_DIR$/src/com/qcar/service/VertxLauncher.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/handlers/UserHandler.java" />
         <option value="$PROJECT_DIR$/src/com/qcar/service/ctrl/UserCtrl.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -970,7 +963,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32933334" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32933334" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1043,13 +1036,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/vert.x/vertx-core-3.5.0.jar!/io/vertx/core/http/impl/HttpServerResponseImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/vert.x/vertx-core-3.5.0.jar!/io/vertx/core/http/HttpServer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1893,6 +1879,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="53" lean-forward="false" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
           <folding />
         </state>
       </provider>
