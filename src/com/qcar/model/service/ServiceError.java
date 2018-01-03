@@ -42,12 +42,15 @@ public class ServiceError {
         return errorMessage;
     }
 
-    public static final Buffer response(Throwable e, ErrorCodes errorCode) {
+    public static final Buffer response(Throwable e, ErrorCodes errorCode,Integer statusCode) {
         ServiceError returnSingle = new ServiceError();
         returnSingle.errorCode = errorCode;
+
         returnSingle.logMessage=e.getMessage();
 
-        returnSingle.statusCode = 500;
+        returnSingle.statusCode = statusCode;
+
+        returnSingle.errorMessage=errorCode.getErrorMessage();
 
         return Json.encodeToBuffer(returnSingle);
     }
@@ -56,11 +59,11 @@ public class ServiceError {
         return logMessage;
     }
 
-    public static final Buffer response(Throwable e) {
+    public static final Buffer response(Throwable e,Integer statusCode) {
         ServiceError returnSingle = new ServiceError();
 
         returnSingle.errorCode=ErrorCodes.UN_DEFINED_EXCEPTION;
-        returnSingle.statusCode = 500;
+        returnSingle.statusCode = statusCode;
         returnSingle.logMessage=e.getMessage();
         returnSingle.errorMessage=ErrorCodes.UN_DEFINED_EXCEPTION.getErrorMessage();
         return Json.encodeToBuffer(returnSingle);

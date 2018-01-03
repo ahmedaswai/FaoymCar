@@ -2,6 +2,7 @@ package com.qcar.model.mongo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mongodb.morphia.annotations.*;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
                 @Index(value = "loginName", fields = @Field("loginName"), options = @IndexOptions(unique = true))
         }
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends GenericEntity {
 
 
@@ -100,6 +102,10 @@ public class User extends GenericEntity {
         return permissionList;
     }
 
+    public User permissionList(List<Permission>p) {
+        this.permissionList=p;
+        return this;
+    }
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");

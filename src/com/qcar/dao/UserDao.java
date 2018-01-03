@@ -1,11 +1,14 @@
 package com.qcar.dao;
 
+import com.qcar.model.mongo.GenericEntity;
 import com.qcar.model.mongo.User;
+import com.qcar.service.cache.QCarCache;
 import com.qcar.utils.CollectionUtils;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,49 +17,27 @@ import java.util.Optional;
  * Created by ahmedissawi on 12/23/17.
  */
 
-public class UserDao extends GenericDao<User> implements IDao<User> {
+public class UserDao extends GenericDao<User> implements IDao<User>,IStatusDao {
 
     public static final String LOGIN_NAME = "loginName";
 
 
-    UserDao() {
+    UserDao(QCarCache cache) {
 
+        super(cache);
     }
+
 
     @Override
     public List<User> findByExample(User user) {
         return null;
     }
 
-    @Override
-    public Boolean delete(User user) {
-        return null;
-    }
-
-    @Override
-    public Boolean deleteById(Long id) {
-        Query query = getDataStore().
-                createQuery(User.class).field(ID).
-                equal(id);
-        return getDataStore().findAndDelete(query)!=null;
-    }
 
 
-    public Boolean isExistsByLoginName(User user) {
+    public User changeStatus(Long id,Boolean status){
 
-        Query query = getDataStore().
-                createQuery(User.class).field(LOGIN_NAME).
-                equal(user.getLoginName());
-
-        long count = query.count();
-        return count > 0;
-    }
-
-
-    public List<User>findAll(){
-        Query<User> query = getDataStore().
-                createQuery(User.class);
-        return query.asList();
+        return (User) changeStatus(this,id,status,User.class);
     }
     public Optional<User> findUserByLoginName(String user) {
 
@@ -78,21 +59,23 @@ public class UserDao extends GenericDao<User> implements IDao<User> {
         }
         return Optional.ofNullable(u);
     }
+    public Boolean isExistsByLoginName(User user) {
 
-    public User findUserById(Long id) {
-        Query<User> query = getDataStore().
-                createQuery(User.class).field(ID).
-                equal(id);
-        FindOptions options = new FindOptions();
+        Query query = getDataStore().
+                createQuery(User.class).field(LOGIN_NAME).
+                equal(user.getLoginName());
 
+        long count = query.count();
+        return count > 0;
+    }
 
-        options.limit(1);
+    @Override
+    public Class<User> getEntityClass() {
+        return User.class;
+    }
 
-        List<User> userList = query.asList(options);
-        if (CollectionUtils.isEmpty(userList)) {
-            throw new RuntimeException("User is not Existing");
-        }
-        User u = userList.get(0);
-        return u;
+    @Override
+    public User getEntity() {
+        return User.instance();
     }
 }

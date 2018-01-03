@@ -1,0 +1,32 @@
+<configuration>
+
+    <appender name="DEFAULT-FILE" class="ch.qos.logback.core.FileAppender">
+        <append>true</append>
+        <file>logger.log</file>
+        <encoder charset="UTF-8">
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DEFAULT-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- Have tried to play around with queue size - no major effect -->
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="DEFAULT-FILE" />
+    </appender>
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <!-- Switch between the two appenders -->
+
+        <!-- <appender-ref ref="DEFAULT-ASYNC" />-->
+         <appender-ref ref="consoleAppender" />
+     </root>
+
+ </configuration>

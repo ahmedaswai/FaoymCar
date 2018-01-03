@@ -1,4 +1,4 @@
-package com.qcar.service.handlers;
+package com.qcar.service.handlers.business;
 
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.UserDao;
@@ -18,6 +18,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import javafx.util.Pair;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,15 +30,16 @@ import java.util.stream.Collectors;
 /**
  * Created by ahmedissawi on 12/28/17.
  */
-public class UserHandler extends GenericHandler{
+public class UserHandler extends GenericHandler {
 
     final UserDao dao;
-    UserHandler(){
-           dao = DaoFactory.getUserDao();
+
+    public UserHandler(){
+           dao = DaoFactory.userDao();
     }
 
 
-    public void findUserByLoginName(RoutingContext ctx){
+    public void findByLoginName(RoutingContext ctx){
 
         String user =ctx.request().getParam("loginName");
 
@@ -55,20 +57,20 @@ public class UserHandler extends GenericHandler{
 
                 .setStatusCode(200).end(rs);
     }
-    public void findUserById(RoutingContext ctx){
+    public void findById(RoutingContext ctx){
 
 
             Long id = Long.parseLong(ctx.request().getParam("id"));
 
-            User u = dao.findUserById(id);
-            Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(u));
+            User u = dao.findById(id).get();
+            Buffer rs = ServiceReturnSingle.response(u);
             ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 
                     .setStatusCode(200).end(rs);
 
 
     }
-    public void findAllUsers(RoutingContext ctx){
+    public void findAll(RoutingContext ctx){
 
 
 
@@ -83,7 +85,7 @@ public class UserHandler extends GenericHandler{
 
 
     }
-    public void doAddUser(RoutingContext ctx){
+    public void doAdd(RoutingContext ctx){
 
 
 
@@ -100,7 +102,7 @@ public class UserHandler extends GenericHandler{
 
 
     }
-    public void doDeleteUser(RoutingContext ctx){
+    public void doDelete(RoutingContext ctx){
 
 
         Long id = Long.parseLong(ctx.request().getParam("id"));
@@ -113,7 +115,7 @@ public class UserHandler extends GenericHandler{
 
 
     }
-    public void doDeleteUserBulk(RoutingContext ctx){
+    public void doDeleteBulk(RoutingContext ctx){
 
 
         List<Long> ids = Json.decodeValue(ctx.getBody(), CollectionUtils.LONG_LIST_TYPE);
@@ -133,9 +135,9 @@ public class UserHandler extends GenericHandler{
         String password = login.getString("password");
         String userName = login.getString("userName");
 
-        LoginResult rs = checkLogin(userName, password);
+        Pair<User,LoginResult> rs = checkLogin(userName, password);
 
-        switch (rs) {
+        switch (rs.getValue()) {
 
             case INVALID_USER_NAME:
                 ctx.fail(new QCarSecurityException(ErrorCodes.USER_NOT_FOUND));
@@ -145,7 +147,11 @@ public class UserHandler extends GenericHandler{
                 break;
             case LOGIN_SUCCESS:
                 Map<String,Object>mp=new HashMap<>();
-                User u=dao.findUserByLoginName(userName).get();
+
+                User u=rs.getKey();
+                if(u.getStatus()==null|| !u.getStatus()){
+                    ctx.fail(new QCarSecurityException(ErrorCodes.USER_NOT_ACTIVE));
+                }
                 mp.put("user",u);
                 mp.put("token", JwtTokenUtil.generateToken(u).get());
                 ctx.response()
@@ -164,8 +170,8 @@ public class UserHandler extends GenericHandler{
         String oldPassword = login.getString("oldPassword");
 
         String userName = login.getString("userName");
-        LoginResult rs= checkLogin(userName,oldPassword);
-        switch (rs) {
+        Pair<User,LoginResult> rs= checkLogin(userName,oldPassword);
+        switch (rs.getValue()) {
 
             case INVALID_USER_NAME:
                 ctx.fail(new QCarSecurityException(ErrorCodes.USER_NOT_FOUND));
@@ -177,7 +183,7 @@ public class UserHandler extends GenericHandler{
                 break;
         }
 
-        User u= dao.findUserByLoginName(userName).get();
+        User u= rs.getKey();
 
         String newHashedPassword=SecurityUtils.hashPassword(newPassword);
 
@@ -191,21 +197,41 @@ public class UserHandler extends GenericHandler{
                 .setStatusCode(200).
                 end(ServiceReturnSingle.response(true));
     }
-    private LoginResult checkLogin(String user, String pass) {
-        final UserDao dao = DaoFactory.getUserDao();
+    public void doActivate(RoutingContext ctx){
+
+        Long id = Long.parseLong(ctx.request().getParam("id"));
+
+        User u = dao.changeStatus(id,true);
+        Buffer rs = ServiceReturnSingle.response(u);
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+    }
+    public void doDeActivate(RoutingContext ctx){
+
+        Long id = Long.parseLong(ctx.request().getParam("id"));
+
+        User u = dao.changeStatus(id,false);
+        Buffer rs = ServiceReturnSingle.response(u);
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+    }
+
+    private Pair<User,LoginResult> checkLogin(String user, String pass) {
 
         Optional<User> u = dao.findUserByLoginName(user);
 
         if (u.isPresent()) {
             boolean status = SecurityUtils.checkPassword(pass, u.get().getPassword());
             if (!status) {
-                return LoginResult.INVALID_PASSWORD;
+                return new Pair<>(null,LoginResult.INVALID_PASSWORD);
             }
         } else {
-            return LoginResult.INVALID_USER_NAME;
+            return new Pair<>(null,LoginResult.INVALID_USER_NAME);
         }
 
-        return LoginResult.LOGIN_SUCCESS;
+        return new Pair<>(u.get(),LoginResult.LOGIN_SUCCESS);
 
 
     }

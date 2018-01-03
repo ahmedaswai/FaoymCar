@@ -1,9 +1,11 @@
 package com.qcar.model.mongo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-public class Location {
+public class    Location {
 
     private Double[] coordinates = new Double[2];
 
@@ -34,4 +36,13 @@ public class Location {
     public void setType(String type) {
         this.type = type;
     }
+    @JsonIgnore
+    public Double getLat(){
+        return coordinates[1];
+    }
+    @JsonIgnore
+    public Double getLng(){
+        return coordinates[0];
+    }
+
 }

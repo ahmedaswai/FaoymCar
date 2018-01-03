@@ -19,7 +19,7 @@ public abstract class GenericEntity {
     @Id
     protected Long id;
 
-    private Integer updatedBy;
+    private Long updatedBy;
     private ClientInfo clientInfo;
     private Date updatedOn = new Date();
 
@@ -35,11 +35,11 @@ public abstract class GenericEntity {
     }
 
 
-    public Integer getUpdatedBy() {
+    public Long getUpdatedBy() {
         return updatedBy;
     }
 
-    public GenericEntity updatedBy(Integer updatedBy) {
+    public GenericEntity updatedBy(Long updatedBy) {
 
         this.updatedBy = updatedBy;
         return this;
@@ -49,7 +49,7 @@ public abstract class GenericEntity {
         return clientInfo;
     }
 
-    public GenericEntity setClientInfo(ClientInfo clientInfo) {
+    public GenericEntity clientInfo(ClientInfo clientInfo) {
 
         this.clientInfo = clientInfo;
         return this;
@@ -59,7 +59,7 @@ public abstract class GenericEntity {
         return updatedOn;
     }
 
-    public GenericEntity setUpdatedOn(Date updatedOn) {
+    public GenericEntity updatedOn(Date updatedOn) {
 
         this.updatedOn = updatedOn;
         return this;

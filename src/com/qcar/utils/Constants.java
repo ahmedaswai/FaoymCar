@@ -10,6 +10,6 @@ public final class Constants {
 
     public static final String AUTHENTICATION_SECRET="q-car-secret";
 
-    public static final Long TOKEN_MINUTES_EXPIRATION=30L;
+    public static final Long TOKEN_MINUTES_EXPIRATION=300L;
 
 }

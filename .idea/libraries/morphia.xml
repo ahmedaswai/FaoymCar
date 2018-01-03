@@ -7,6 +7,8 @@
       <root url="jar://$PROJECT_DIR$/lib/morphia/morphia-logging-slf4j-1.3.2.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/morphia-1.3.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

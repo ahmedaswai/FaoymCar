@@ -24,7 +24,7 @@ public class UserDao {
     private com.qcar.dao.UserDao dao;
     @Before
     public void init(){
-        dao = DaoFactory.getUserDao();
+        dao = DaoFactory.userDao();
     }
 
     @Test

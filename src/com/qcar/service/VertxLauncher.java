@@ -4,9 +4,10 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import com.qcar.service.ctrl.CtrlFactory;
+import com.qcar.service.ctrl.DriverCtrl;
 import com.qcar.service.ctrl.UserCtrl;
 import com.qcar.service.handlers.HandlerFactory;
-import com.qcar.service.handlers.SecurityHandler;
+import com.qcar.service.handlers.config.SecurityHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -15,7 +16,6 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.SLF4JLogDelegateFactory;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.CorsHandler;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import org.mongodb.morphia.logging.slf4j.SLF4JLoggerImplFactory;
@@ -42,11 +42,10 @@ public class VertxLauncher extends AbstractVerticle {
         morphiaLogger.setLevel(Level.INFO);
     }
     private void initCtrls(Router router){
-        UserCtrl service = CtrlFactory.userCtrl();
-
-
-
-        service.registerHandler(router);
+        UserCtrl userCtrl = CtrlFactory.userCtrl();
+        DriverCtrl driverCtrl=CtrlFactory.driverCtrl();
+        userCtrl.registerHandler(router);
+        driverCtrl.registerHandler(router);
     }
     private void initSecurityHandler(Router router){
         SecurityHandler handler=HandlerFactory.securityHandler();
@@ -63,14 +62,21 @@ public class VertxLauncher extends AbstractVerticle {
 
         Router mainRouter = Router.router(vertx);
 
-       enableCors(mainRouter);
+        enableCors(mainRouter);
 
         initSecurityHandler(mainRouter);
+
         initCtrls(mainRouter);
 
         mainRouter.route().failureHandler(HandlerFactory.errorHandler());
 
+        mainRouter.route().useNormalisedPath(false);
+
+        mainRouter.route().last().handler(HandlerFactory.resourceNotFoundHandler());
+
         server.requestHandler(mainRouter::accept);
+
+
 
         server.listen(8080, (rs -> {
             if (rs.succeeded()) {

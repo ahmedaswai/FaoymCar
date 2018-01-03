@@ -1,6 +1,7 @@
-package com.qcar.service.handlers;
+package com.qcar.service.handlers.business;
 
 import com.qcar.model.mongo.GenericEntity;
+import com.qcar.model.mongo.User;
 import com.qcar.model.service.ClientInfo;
 import io.vertx.ext.web.RoutingContext;
 
@@ -12,12 +13,11 @@ import java.util.Map;
 public class GenericHandler {
     GenericHandler(){}
     public void setClientInfo(GenericEntity entity,RoutingContext ctx){
-        Map<String,Object>clientInfo=new HashMap<>();
 
-
-
-       entity.setUpdatedOn(new Date());
-       entity.setClientInfo(ClientInfo.instance(ctx.request()));
+        User user=(User) ctx.data().get("user");
+       entity.updatedOn(new Date())
+               .updatedBy(user.getId()).
+                clientInfo(ClientInfo.instance(ctx.request()));
 
     }
 }
