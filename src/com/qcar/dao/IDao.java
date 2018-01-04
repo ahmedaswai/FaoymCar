@@ -21,5 +21,9 @@ public interface IDao<T extends GenericEntity> {
 
     Boolean deleteById(Long id);
 
+    default T findByIdAndSave(Long id,T t){
+        return null;
+    }
+
 
 }

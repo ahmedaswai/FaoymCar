@@ -7,8 +7,10 @@ import com.qcar.service.ctrl.CtrlFactory;
 import com.qcar.service.ctrl.DriverCtrl;
 import com.qcar.service.ctrl.UserCtrl;
 import com.qcar.service.handlers.HandlerFactory;
+import com.qcar.service.handlers.config.ConfigHandler;
 import com.qcar.service.handlers.config.SecurityHandler;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
@@ -17,6 +19,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.SLF4JLogDelegateFactory;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.CorsHandler;
+import io.vertx.ext.web.handler.StaticHandler;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import org.mongodb.morphia.logging.slf4j.SLF4JLoggerImplFactory;
 
@@ -29,6 +32,7 @@ public class VertxLauncher extends AbstractVerticle {
 
 
     private final Vertx vertx = Vertx.vertx();
+
 
 
     private void initLog(){
@@ -51,8 +55,10 @@ public class VertxLauncher extends AbstractVerticle {
         SecurityHandler handler=HandlerFactory.securityHandler();
         router.route("/api/*").handler(handler);
     }
+
     @Override
     public void start(Future<Void> startFuture) {
+
 
 
 
@@ -62,7 +68,7 @@ public class VertxLauncher extends AbstractVerticle {
 
         Router mainRouter = Router.router(vertx);
 
-        enableCors(mainRouter);
+        configRouter(mainRouter);
 
         initSecurityHandler(mainRouter);
 
@@ -88,7 +94,8 @@ public class VertxLauncher extends AbstractVerticle {
 
     }
 
-    private void enableCors(Router router){
+    private void configRouter(Router router){
+        router.route().handler(new ConfigHandler());
         router.route().handler(CorsHandler.create("*")
                 .allowedMethod(HttpMethod.GET)
                 .allowedMethod(HttpMethod.POST)
@@ -109,10 +116,16 @@ public class VertxLauncher extends AbstractVerticle {
 
     @Override
     public JsonObject config() {
+
+
         return super.config();
     }
 
     public static void main(String[] args) {
-        Vertx.vertx().deployVerticle(VertxLauncher.class.getName());
+
+
+        DeploymentOptions options=new DeploymentOptions();
+        Vertx.vertx().
+                deployVerticle(VertxLauncher.class,options);
     }
 }

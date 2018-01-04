@@ -1,23 +1,111 @@
 package com.qcar.service.handlers.business;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.qcar.dao.GenericDao;
+import com.qcar.model.mongo.Driver;
 import com.qcar.model.mongo.GenericEntity;
 import com.qcar.model.mongo.User;
 import com.qcar.model.service.ClientInfo;
+import com.qcar.model.service.ServiceReturnList;
+import com.qcar.model.service.ServiceReturnMap;
+import com.qcar.model.service.ServiceReturnSingle;
+import com.qcar.utils.CollectionUtils;
+import com.qcar.utils.MediaType;
+import com.qcar.utils.SecurityUtils;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.Json;
 import io.vertx.ext.web.RoutingContext;
 
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class GenericHandler {
+public abstract class GenericHandler<T extends GenericEntity> {
     GenericHandler(){}
-    public void setClientInfo(GenericEntity entity,RoutingContext ctx){
 
-        User user=(User) ctx.data().get("user");
+    public abstract GenericDao<T>getDao();
+    public void setClientInfo(T entity,RoutingContext ctx){
+
+       User user=(User) ctx.data().get("user");
        entity.updatedOn(new Date())
                .updatedBy(user.getId()).
                 clientInfo(ClientInfo.instance(ctx.request()));
 
     }
+    public void findById(RoutingContext ctx){
+
+
+        Long id = Long.parseLong(ctx.request().getParam("id"));
+
+        T u = getDao().findById(id).get();
+        Buffer rs = ServiceReturnSingle.response(u);
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+
+
+    }
+    public void findAll(RoutingContext ctx){
+
+
+
+
+        List<T> lst = getDao().findAll();
+
+        Buffer rs = ServiceReturnList.response(lst);
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+
+
+    }
+
+    public void doDelete(RoutingContext ctx){
+
+
+        Long id = Long.parseLong(ctx.request().getParam("id"));
+        Buffer rs = ServiceReturnSingle.response(getDao().deleteById(id));
+
+        ctx.response().
+                putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+
+
+    }
+    public void doDeleteBulk(RoutingContext ctx){
+
+
+        List<Long> ids = Json.decodeValue(ctx.getBody(), CollectionUtils.LONG_LIST_TYPE);
+        Map<Long,Boolean> mp=ids.stream().collect(Collectors.toMap(Function.identity(),getDao()::deleteById));
+        Buffer rs = ServiceReturnMap.response(mp);
+
+        ctx.response().
+                putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+
+
+    }
+    public void doAdd(RoutingContext ctx,Class<T>t){
+
+
+        T entity = Json.decodeValue(ctx.getBody(),t);
+
+        setClientInfo(entity,ctx);
+
+        Buffer rs = ServiceReturnSingle.response(getDao().saveOrMerge(entity));
+        ctx.response().
+                putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+
+
+    }
+
 }

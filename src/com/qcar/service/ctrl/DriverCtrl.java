@@ -2,12 +2,12 @@ package com.qcar.service.ctrl;
 
 import com.qcar.service.handlers.HandlerFactory;
 import com.qcar.service.handlers.business.DriverHandler;
-import com.qcar.service.handlers.business.UserHandler;
 import com.qcar.utils.MediaType;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 public class DriverCtrl implements ICtrl{
+
     @Override
     public String getRoute() {
         return "/api/drivers";
@@ -17,31 +17,26 @@ public class DriverCtrl implements ICtrl{
     public void registerHandler(Router mainRouter) {
         DriverHandler handler = HandlerFactory.driverHandler();
 
-        mainRouter.get()
-                .path(getRoute() + "/id/:id")
-                .produces(MediaType.APPLICATION_JSON)
 
-                .handler(handler::findById);
-
+        registerDefaultRoutes(handler,mainRouter);
 
         mainRouter.get()
-                .path(getRoute())
-                .produces(MediaType.APPLICATION_JSON)
-
-                .handler(handler::findAll);
-
-
-        mainRouter.get()
-                .path(getRoute()+"/distance")
+                .path(getRoute("distance"))
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(handler::findInDistance);
 
         mainRouter.get()
-                .path(getRoute()+"/online")
+                .path(getRoute("online"))
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(handler::findAllActiveOnline);
+
+        mainRouter.get()
+                .path(getRoute("pic/id/:id"))
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(handler::findPic);
 
         mainRouter.post()
                 .path(getRoute())
@@ -58,26 +53,24 @@ public class DriverCtrl implements ICtrl{
                 .handler(handler::doAdd);
 
         mainRouter.put()
-                .path(getRoute()+"/:id/activate")
+                .path(getRoute(":id/activate"))
                 .produces(MediaType.APPLICATION_JSON)
                 .handler(handler::doActivate);
 
         mainRouter.put()
-                .path(getRoute()+"/:id/de-activate")
+                .path(getRoute(":id/de-activate"))
                 .produces(MediaType.APPLICATION_JSON)
                 .handler(handler::doDeActivate);
 
-        mainRouter.delete()
-                .path(getRoute()+"/id/:id")
-                .produces(MediaType.APPLICATION_JSON)
 
-                .handler(handler::doDelete);
 
-        mainRouter.delete()
-                .path(getRoute()+"/bulk")
-                .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doDeleteBulk);
+        mainRouter.post().path(getRoute("id/:id/pic")).
+                produces(MediaType.APPLICATION_JSON).
+                consumes(MediaType.MULTIPART_FORM_DATA).
+                handler(BodyHandler.create().
+                        setUploadsDirectory("uploads").
+                        setDeleteUploadedFilesOnEnd(true)).
+                handler(handler::doUploadPic);
+
     }
 }

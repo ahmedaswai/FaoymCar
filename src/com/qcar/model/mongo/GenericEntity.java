@@ -77,7 +77,10 @@ public abstract class GenericEntity {
         return sb.toString();
     }
 
-
     public abstract String getCollectionName();
+    public  GenericEntity updatedCachedEntity(){
+        return this;
+    }
+
 
 }

@@ -25,9 +25,11 @@ public class Driver extends GenericEntity {
         return new Driver();
     }
     private String fullName;
+
     private Integer city;
 
 
+    private FileStore pic;
     private String homeAddress;
 
     private Location homeLocation;
@@ -233,6 +235,15 @@ public class Driver extends GenericEntity {
         this.credit = credit;
         return this;
     }
+    @JsonIgnore
+    public Driver pic(FileStore pic) {
+        this.pic = pic;
+        return this;
+    }
+
+    public FileStore getPic() {
+        return pic;
+    }
 
     @Override
     public String toString() {
@@ -266,5 +277,11 @@ public class Driver extends GenericEntity {
     @JsonIgnore
     public String getCollectionName() {
         return "drivers";
+    }
+
+
+    public Driver updatedCachedEntity() {
+       this.pic=null;
+       return this;
     }
 }

@@ -10,6 +10,8 @@ public enum ErrorCodes {
     USER_NOT_ACTIVE(1002,"User is Not Active"),
     PASSWORD_RESET_IS_SAME(1003,"Can not reset password with the same password"),
     INVALID_TOKEN(1004,"Invalid Token"),
+    ERROR_UPLOAD(3000,"Error During Upload"),
+    ERROR_DOWNLOAD(3001,"Error During Download"),
     UN_DEFINED_EXCEPTION(9001,"Undefined Exception"),
     SERVER_ROUTE_ERROR(9002,"Service Route is Invalid");
 

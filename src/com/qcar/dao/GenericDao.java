@@ -72,6 +72,7 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
         return t;
     }
 
+
     protected void setId(T entity) {
 
         if (entity.getId() == null) {

@@ -1,6 +1,7 @@
 package com.qcar.dao;
 
 import com.qcar.model.mongo.Driver;
+import com.qcar.model.mongo.FileStore;
 import com.qcar.model.mongo.Location;
 import com.qcar.model.mongo.User;
 import com.qcar.service.cache.QCarCache;
@@ -22,7 +23,7 @@ public class DriverDao extends GenericDao<Driver>implements IDao<Driver>,IStatus
     public static final String CURRENT_LOCATION="currentLocation";
     public static final String STATUS="status";
     public static final String ONLINE="online";
-
+    public static final String PIC="pic";
     @Override
     public List<Driver> findByExample(Driver driver) {
         return null;
@@ -55,6 +56,12 @@ public class DriverDao extends GenericDao<Driver>implements IDao<Driver>,IStatus
         return getDataStore().createQuery(Driver.class).
                     field(STATUS).equal(true).field(ONLINE).
                 equal(true).asList();
+    }
+
+    public FileStore findDriverPic(Long id) {
+        return getDataStore().createQuery(Driver.class).
+                field(ID).equal(id).
+                retrievedFields(true, PIC).get().getPic();
     }
 
     @Override

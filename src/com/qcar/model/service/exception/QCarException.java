@@ -20,6 +20,12 @@ public class QCarException extends RuntimeException {
 
     }
 
+    public QCarException(String message,ErrorCodes errorCode) {
+
+        super(message);
+        this.errorCode=errorCode;
+
+    }
     public ErrorCodes getErrorCode() {
         return errorCode;
     }

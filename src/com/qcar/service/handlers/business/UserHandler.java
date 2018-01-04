@@ -1,6 +1,7 @@
 package com.qcar.service.handlers.business;
 
 import com.qcar.dao.DaoFactory;
+import com.qcar.dao.GenericDao;
 import com.qcar.dao.UserDao;
 import com.qcar.model.mongo.Permission;
 import com.qcar.model.mongo.User;
@@ -30,12 +31,17 @@ import java.util.stream.Collectors;
 /**
  * Created by ahmedissawi on 12/28/17.
  */
-public class UserHandler extends GenericHandler {
+public class UserHandler extends GenericHandler<User> {
 
     final UserDao dao;
 
     public UserHandler(){
            dao = DaoFactory.userDao();
+    }
+
+    @Override
+    public GenericDao<User> getDao() {
+        return dao;
     }
 
 
@@ -57,71 +63,17 @@ public class UserHandler extends GenericHandler {
 
                 .setStatusCode(200).end(rs);
     }
-    public void findById(RoutingContext ctx){
 
-
-            Long id = Long.parseLong(ctx.request().getParam("id"));
-
-            User u = dao.findById(id).get();
-            Buffer rs = ServiceReturnSingle.response(u);
-            ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                    .setStatusCode(200).end(rs);
-
-
-    }
-    public void findAll(RoutingContext ctx){
-
-
-
-
-        List<User> lst = dao.findAll();
-
-        Buffer rs = ServiceReturnList.response(lst);
-
-        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                .setStatusCode(200).end(rs);
-
-
-    }
     public void doAdd(RoutingContext ctx){
 
 
 
-            User user = Json.decodeValue(ctx.getBody(), User.class);
-            String hashedPassword=SecurityUtils.hashPassword(user.getPassword());
-            user.password(hashedPassword);
+        User user = Json.decodeValue(ctx.getBody(), User.class);
+        String hashedPassword= SecurityUtils.hashPassword(user.getPassword());
+        user.password(hashedPassword);
 
-            setClientInfo(user,ctx);
-            Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
-            ctx.response().
-                    putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                    .setStatusCode(200).end(rs);
-
-
-    }
-    public void doDelete(RoutingContext ctx){
-
-
-        Long id = Long.parseLong(ctx.request().getParam("id"));
-        Buffer rs = ServiceReturnSingle.response(dao.deleteById(id));
-
-        ctx.response().
-                putHeader("content-type", MediaType.APPLICATION_JSON)
-
-                .setStatusCode(200).end(rs);
-
-
-    }
-    public void doDeleteBulk(RoutingContext ctx){
-
-
-        List<Long> ids = Json.decodeValue(ctx.getBody(), CollectionUtils.LONG_LIST_TYPE);
-        Map<Long,Boolean> mp=ids.stream().collect(Collectors.toMap(Function.identity(),dao::deleteById));
-        Buffer rs = ServiceReturnMap.response(mp);
-
+        setClientInfo(user,ctx);
+        Buffer rs = ServiceReturnSingle.response(dao.saveOrMerge(user));
         ctx.response().
                 putHeader("content-type", MediaType.APPLICATION_JSON)
 

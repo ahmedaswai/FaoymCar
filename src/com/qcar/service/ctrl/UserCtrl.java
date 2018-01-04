@@ -22,7 +22,7 @@ public class UserCtrl implements ICtrl {
 
         UserHandler handler = HandlerFactory.userHandler();
 
-
+        registerDefaultRoutes(handler,mainRouter);
         mainRouter.post()
                 .path("/login")
                 .produces(MediaType.APPLICATION_JSON)
@@ -32,36 +32,28 @@ public class UserCtrl implements ICtrl {
                 .handler(handler::doLogin);
 
         mainRouter.post()
-                .path(getRoute() + "/password/reset")
+                .path(getRoute("password/reset"))
                 .produces(MediaType.APPLICATION_JSON)
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
 
                 .handler(handler::doResetPassword);
 
-        mainRouter.get()
-                .path(getRoute() + "/id/:id")
-                .produces(MediaType.APPLICATION_JSON)
 
-                .handler(handler::findById);
 
         mainRouter.get()
-                .path(getRoute() + "/permissions")
+                .path(getRoute("permissions"))
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(handler::findAllPermissions);
 
         mainRouter.get()
-                .path(getRoute() + "/login/:loginName")
+                .path(getRoute("login/:loginName"))
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(handler::findByLoginName);
 
-        mainRouter.get()
-                .path(getRoute())
-                .produces(MediaType.APPLICATION_JSON)
 
-                .handler(handler::findAll);
 
 
         mainRouter.post()
@@ -79,27 +71,15 @@ public class UserCtrl implements ICtrl {
                 .handler(handler::doAdd);
 
         mainRouter.put()
-                .path(getRoute()+"/:id/activate")
+                .path(getRoute(":id/activate"))
                 .produces(MediaType.APPLICATION_JSON)
                 .handler(handler::doActivate);
 
         mainRouter.put()
-                .path(getRoute()+"/:id/de-activate")
+                .path(getRoute(":id/de-activate"))
                 .produces(MediaType.APPLICATION_JSON)
                 .handler(handler::doDeActivate);
 
-        mainRouter.delete()
-                .path(getRoute()+"/id/:id")
-                .produces(MediaType.APPLICATION_JSON)
-
-                .handler(handler::doDelete);
-
-        mainRouter.delete()
-                .path(getRoute()+"/bulk")
-                .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doDeleteBulk);
 
     }
 

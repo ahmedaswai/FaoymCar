@@ -36,7 +36,7 @@ public final class QCarCache {
 
         Map<Long,GenericEntity>mp=lst.stream().
                                 filter(x->x!=null)
-                                .collect(Collectors.toMap(x->x.getId(),Function.identity()));
+                                .collect(Collectors.toMap(x->x.getId(),(v)->v.updatedCachedEntity()));
         cache.put(entity.getCollectionName(),mp);
 
     }
@@ -55,7 +55,8 @@ public final class QCarCache {
 
         logger.info("Updating  Cache Instance  {} with Id {} ",entity.getCollectionName(),entity.getId());
 
-        cache.get(entity.getCollectionName()).put(entity.getId(),entity);
+
+        cache.get(entity.getCollectionName()).put(entity.getId(),entity.updatedCachedEntity());
         return true;
     }
     public List<String>getAllKeys(){
