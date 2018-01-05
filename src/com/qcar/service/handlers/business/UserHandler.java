@@ -3,6 +3,7 @@ package com.qcar.service.handlers.business;
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.GenericDao;
 import com.qcar.dao.UserDao;
+import com.qcar.model.mongo.Driver;
 import com.qcar.model.mongo.Permission;
 import com.qcar.model.mongo.User;
 import com.qcar.model.service.LoginResult;
@@ -170,6 +171,15 @@ public class UserHandler extends GenericHandler<User> {
                 .setStatusCode(200).end(rs);
     }
 
+    public void findAllActive(RoutingContext ctx) {
+        List<User> lst = dao.findAllActive();
+
+        Buffer rs = ServiceReturnList.response(lst);
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+    }
     private Pair<User,LoginResult> checkLogin(String user, String pass) {
 
         Optional<User> u = dao.findUserByLoginName(user);

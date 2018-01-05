@@ -10,15 +10,15 @@ import java.util.Date;
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-@Entity("drivers")
+@Entity(value = "drivers", noClassnameStored = true)
 @Indexes(
         {@Index(value = "id", fields = @Field("id"))
+                , @Index(value = "updatedOn", fields = @Field(value = "updatedOn", type = IndexType.DESC))
                 , @Index(value = "fullName", fields = @Field(value = "fullName", type = IndexType.TEXT))
                 , @Index(value = "currentLocation", fields = @Field(value = "currentLocation", type = IndexType.GEO2DSPHERE))
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 public class Driver extends GenericEntity {
 
     public  static final Driver instance(){

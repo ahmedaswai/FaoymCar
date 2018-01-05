@@ -1,5 +1,6 @@
 package com.qcar.dao;
 
+import com.qcar.model.mongo.Customer;
 import com.qcar.model.mongo.GenericEntity;
 import com.qcar.model.mongo.User;
 import com.qcar.service.cache.QCarCache;
@@ -67,6 +68,10 @@ public class UserDao extends GenericDao<User> implements IDao<User>,IStatusDao {
 
         long count = query.count();
         return count > 0;
+    }
+
+    public List<User> findAllActive() {
+        return findAllActive(this, User.class);
     }
 
     @Override

@@ -23,6 +23,7 @@ public class UserCtrl implements ICtrl {
         UserHandler handler = HandlerFactory.userHandler();
 
         registerDefaultRoutes(handler,mainRouter);
+
         mainRouter.post()
                 .path("/login")
                 .produces(MediaType.APPLICATION_JSON)
@@ -53,22 +54,13 @@ public class UserCtrl implements ICtrl {
 
                 .handler(handler::findByLoginName);
 
-
-
-
-        mainRouter.post()
-                .path(getRoute())
+        mainRouter.get()
+                .path(getRoute("active"))
                 .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doAdd);
 
-        mainRouter.put()
-                .path(getRoute())
-                .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doAdd);
+                .handler(handler::findAllActive);
+
+
 
         mainRouter.put()
                 .path(getRoute(":id/activate"))

@@ -2,8 +2,11 @@ package com.qcar.model.mongo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mongodb.morphia.annotations.*;
+import org.mongodb.morphia.utils.IndexType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +15,12 @@ import java.util.List;
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-@Entity("users")
+@Entity(value = "users", noClassnameStored = true)
 @Indexes(
         {
-                @Index(value = "id", fields = @Field("id")),
-                @Index(value = "loginName", fields = @Field("loginName"), options = @IndexOptions(unique = true))
+                @Index(value = "id", fields = @Field(value = "id"))
+                , @Index(value = "updatedOn", fields = @Field(value = "updatedOn", type = IndexType.DESC))
+                , @Index(value = "loginName", fields = @Field("loginName"), options = @IndexOptions(unique = true))
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)

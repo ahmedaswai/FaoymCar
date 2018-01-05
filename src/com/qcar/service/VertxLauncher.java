@@ -4,6 +4,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import com.qcar.service.ctrl.CtrlFactory;
+import com.qcar.service.ctrl.CustomerCtrl;
 import com.qcar.service.ctrl.DriverCtrl;
 import com.qcar.service.ctrl.UserCtrl;
 import com.qcar.service.handlers.HandlerFactory;
@@ -46,10 +47,10 @@ public class VertxLauncher extends AbstractVerticle {
         morphiaLogger.setLevel(Level.INFO);
     }
     private void initCtrls(Router router){
-        UserCtrl userCtrl = CtrlFactory.userCtrl();
-        DriverCtrl driverCtrl=CtrlFactory.driverCtrl();
-        userCtrl.registerHandler(router);
-        driverCtrl.registerHandler(router);
+        CtrlFactory.userCtrl().registerHandler(router);
+        CtrlFactory.driverCtrl().registerHandler(router);
+        CtrlFactory.customerCtrl().registerHandler(router);
+
     }
     private void initSecurityHandler(Router router){
         SecurityHandler handler=HandlerFactory.securityHandler();

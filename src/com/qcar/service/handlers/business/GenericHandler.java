@@ -92,10 +92,11 @@ public abstract class GenericHandler<T extends GenericEntity> {
 
 
     }
-    public void doAdd(RoutingContext ctx,Class<T>t){
+
+    public void doAdd(RoutingContext ctx) {
 
 
-        T entity = Json.decodeValue(ctx.getBody(),t);
+        T entity = Json.decodeValue(ctx.getBody(), getDao().getEntityClass());
 
         setClientInfo(entity,ctx);
 

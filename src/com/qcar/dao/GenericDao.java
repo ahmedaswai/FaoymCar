@@ -10,6 +10,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.Sort;
 import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
 
     public static final String ID = "id";
+    public static final String UPDATED_ON = "updatedOn";
+
     private final QCarCache cache;
 
     protected GenericDao(QCarCache cache) {
@@ -124,7 +127,8 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
         }
 
         Query<T> query = getDataStore().
-                createQuery(getEntityClass());
+                createQuery(getEntityClass()).
+                order(Sort.descending(UPDATED_ON));
         return query.asList();
     }
 
@@ -134,20 +138,11 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
         if(cached!=null){
             return cached;
         }
-        Query<T> query = getDataStore().
+        T t = getDataStore().
                 createQuery(getEntityClass()).field(ID).
-                equal(id);
-        FindOptions options = new FindOptions();
+                equal(id).get();
 
-
-        options.limit(1);
-
-        List<T> userList = query.asList(options);
-        if (CollectionUtils.isEmpty(userList)) {
-            throw new RuntimeException("User is not Existing");
-        }
-        T u = userList.get(0);
-        return Optional.ofNullable(u);
+        return Optional.ofNullable(t);
     }
 
     public QCarCache getCache() {

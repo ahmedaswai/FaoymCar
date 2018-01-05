@@ -1,5 +1,8 @@
 package com.qcar.model.mongo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
@@ -9,7 +12,8 @@ import java.util.Date;
  * Created by ahmedissawi on 12/6/17.
  */
 
-@Entity("orders")
+
+@Entity(value = "orders", noClassnameStored = true)
 @Indexes(
         {@Index(value = "id", fields = @Field("id")),
                 @Index(value = "location", fields = @Field(value = "location", type = IndexType.GEO2DSPHERE)),
@@ -17,6 +21,8 @@ import java.util.Date;
 
         }
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties
 public class Order extends GenericEntity {
     private Location location;
     private Location destLocation;
@@ -77,6 +83,7 @@ public class Order extends GenericEntity {
     }
 
     @Override
+    @JsonIgnore
     public String getCollectionName() {
         return "orders";
     }

@@ -1,5 +1,7 @@
 package com.qcar.model.mongo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
@@ -9,12 +11,15 @@ import org.mongodb.morphia.utils.IndexType;
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-@Entity("customers")
+@Entity(value = "customers", noClassnameStored = true)
 @Indexes(
-        {@Index(value = "id", fields = @Field("id")),
-                @Index(value = "homeLocation", fields = @Field(value = "homeLocation", type = IndexType.GEO2DSPHERE))
+        {@Index(value = "id", fields = @Field("id"))
+                , @Index(value = "updatedOn", fields = @Field(value = "updatedOn", type = IndexType.DESC))
+                , @Index(value = "currentLocation", fields = @Field(value = "currentLocation", type = IndexType.GEO2DSPHERE))
         }
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class Customer extends GenericEntity {
 
     private String fullName;
@@ -30,114 +35,132 @@ public class Customer extends GenericEntity {
     private String notes;
     private Boolean status = true;
     private Boolean inTrip = false;
-    private Integer rating;
+    private Double rating;
     private Double credit;
+
+    public static final Customer instance() {
+        return new Customer();
+    }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public Customer fullName(String fullName) {
         this.fullName = fullName;
+        return this;
     }
 
     public Integer getCity() {
         return city;
     }
 
-    public void setCity(Integer city) {
+    public Customer city(Integer city) {
         this.city = city;
+        return this;
     }
 
     public String getHomeAddress() {
         return homeAddress;
     }
 
-    public void setHomeAddress(String homeAddress) {
+    public Customer homeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+        return this;
     }
 
     public Location getHomeLocation() {
         return homeLocation;
     }
 
-    public void setHomeLocation(Location homeLocation) {
+    public Customer homeLocation(Location homeLocation) {
         this.homeLocation = homeLocation;
+        return this;
     }
 
     public Location getCurrentLocation() {
         return currentLocation;
     }
 
-    public void setCurrentLocation(Location currentLocation) {
+    public Customer currentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
+        return this;
     }
 
     public String getMobileNumber1() {
         return mobileNumber1;
     }
 
-    public void setMobileNumber1(String mobileNumber1) {
+    public Customer mobileNumber1(String mobileNumber1) {
         this.mobileNumber1 = mobileNumber1;
+        return this;
     }
 
     public String getMobileNumber2() {
         return mobileNumber2;
     }
 
-    public void setMobileNumber2(String mobileNumber2) {
+    public Customer mobileNumber2(String mobileNumber2) {
         this.mobileNumber2 = mobileNumber2;
+        return this;
     }
 
     public String getHomePhoneNumber() {
         return homePhoneNumber;
     }
 
-    public void setHomePhoneNumber(String homePhoneNumber) {
+    public Customer homePhoneNumber(String homePhoneNumber) {
         this.homePhoneNumber = homePhoneNumber;
+        return this;
     }
 
     public String getNotes() {
         return notes;
     }
 
-    public void setNotes(String notes) {
+    public Customer notes(String notes) {
         this.notes = notes;
+        return this;
     }
 
     public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public Customer status(Boolean status) {
         this.status = status;
+        return this;
     }
 
     public Boolean getInTrip() {
         return inTrip;
     }
 
-    public void setInTrip(Boolean inTrip) {
+    public Customer inTrip(Boolean inTrip) {
         this.inTrip = inTrip;
+        return this;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public Customer rating(Double rating) {
         this.rating = rating;
+        return this;
     }
 
     public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(Double credit) {
+    public Customer credit(Double credit) {
         this.credit = credit;
+        return this;
     }
 
     @Override
+    @JsonIgnore
     public String getCollectionName() {
         return "customers";
     }

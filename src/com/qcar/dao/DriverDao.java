@@ -58,10 +58,14 @@ public class DriverDao extends GenericDao<Driver>implements IDao<Driver>,IStatus
                 equal(true).asList();
     }
 
+    public List<Driver> findAllActive() {
+        return findAllActive(this, Driver.class);
+    }
     public FileStore findDriverPic(Long id) {
         return getDataStore().createQuery(Driver.class).
                 field(ID).equal(id).
-                retrievedFields(true, PIC).get().getPic();
+                project(PIC, true).
+                get().getPic();
     }
 
     @Override

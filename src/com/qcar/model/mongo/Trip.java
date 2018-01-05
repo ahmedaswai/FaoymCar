@@ -1,5 +1,6 @@
 package com.qcar.model.mongo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
@@ -160,6 +161,7 @@ public class Trip extends GenericEntity {
     }
 
     @Override
+    @JsonIgnore
     public String getCollectionName() {
         return "trips";
     }

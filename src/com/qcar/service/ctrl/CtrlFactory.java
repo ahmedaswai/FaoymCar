@@ -1,12 +1,13 @@
 package com.qcar.service.ctrl;
 
-import com.qcar.dao.DaoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CtrlFactory {
     private static transient volatile UserCtrl userCtrl;
     private static transient volatile DriverCtrl driverCtrl;
+    private static transient volatile CustomerCtrl customerCtrl;
+
 
     private static final Logger logger= LoggerFactory.getLogger(CtrlFactory.class);
 
@@ -25,5 +26,14 @@ public class CtrlFactory {
             logger.debug("Creating Instance of DriverCtrl");
         }
         return driverCtrl;
+    }
+
+    public static CustomerCtrl customerCtrl() {
+
+        if (customerCtrl == null) {
+            customerCtrl = new CustomerCtrl();
+            logger.debug("Creating Instance of CustomerCtrl");
+        }
+        return customerCtrl;
     }
 }

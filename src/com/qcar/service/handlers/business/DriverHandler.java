@@ -66,8 +66,19 @@ public class DriverHandler extends GenericHandler<Driver>{
 
 
     }
+
     public void findAllActiveOnline(RoutingContext ctx){
         List<Driver> lst = dao.findAllActiveOnline();
+
+        Buffer rs = ServiceReturnList.response(lst);
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+    }
+
+    public void findAllActive(RoutingContext ctx) {
+        List<Driver> lst = dao.findAllActive();
 
         Buffer rs = ServiceReturnList.response(lst);
 
@@ -94,12 +105,7 @@ public class DriverHandler extends GenericHandler<Driver>{
 
     }
 
-    public void doAdd(RoutingContext ctx){
 
-
-        doAdd(ctx,Driver.class);
-
-    }
     public void doActivate(RoutingContext ctx){
 
         Long id = Long.parseLong(ctx.request().getParam("id"));
@@ -143,4 +149,6 @@ public class DriverHandler extends GenericHandler<Driver>{
 
                 .setStatusCode(200).end(ServiceReturnSingle.response(true));
     }
+
+
 }

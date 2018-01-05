@@ -27,6 +27,12 @@ public class DriverCtrl implements ICtrl{
                 .handler(handler::findInDistance);
 
         mainRouter.get()
+                .path(getRoute("active"))
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(handler::findAllActive);
+
+        mainRouter.get()
                 .path(getRoute("online"))
                 .produces(MediaType.APPLICATION_JSON)
 
@@ -38,19 +44,7 @@ public class DriverCtrl implements ICtrl{
 
                 .handler(handler::findPic);
 
-        mainRouter.post()
-                .path(getRoute())
-                .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doAdd);
 
-        mainRouter.put()
-                .path(getRoute())
-                .produces(MediaType.APPLICATION_JSON)
-                .consumes(MediaType.APPLICATION_JSON)
-                .handler(BodyHandler.create())
-                .handler(handler::doAdd);
 
         mainRouter.put()
                 .path(getRoute(":id/activate"))

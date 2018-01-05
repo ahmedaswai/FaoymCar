@@ -41,6 +41,20 @@ public interface ICtrl {
                 .handler(BodyHandler.create())
                 .handler(handler::doDeleteBulk);
 
+        mainRouter.post()
+                .path(getRoute())
+                .produces(MediaType.APPLICATION_JSON)
+                .consumes(MediaType.APPLICATION_JSON)
+                .handler(BodyHandler.create())
+                .handler(handler::doAdd);
+
+        mainRouter.put()
+                .path(getRoute())
+                .produces(MediaType.APPLICATION_JSON)
+                .consumes(MediaType.APPLICATION_JSON)
+                .handler(BodyHandler.create())
+                .handler(handler::doAdd);
+
 
 
     }

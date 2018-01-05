@@ -1,6 +1,7 @@
 package com.qcar.service.handlers;
 
 import com.qcar.service.ctrl.CtrlFactory;
+import com.qcar.service.handlers.business.CustomerHandler;
 import com.qcar.service.handlers.business.DriverHandler;
 import com.qcar.service.handlers.business.UserHandler;
 import com.qcar.service.handlers.config.QCarErrorHandler;
@@ -19,6 +20,7 @@ public class HandlerFactory {
     private static transient volatile SecurityHandler securityHandler;
     private static transient volatile ResourceNotFoundHandler resourceNotFoundHandler;
     private static transient volatile DriverHandler driverHandler;
+    private static transient volatile CustomerHandler customerHandler;
 
 
     private static final Logger logger= LoggerFactory.getLogger(HandlerFactory.class);
@@ -64,6 +66,15 @@ public class HandlerFactory {
             logger.debug("Creating Instance of DriverHandler");
         }
         return driverHandler;
+    }
+
+    public static CustomerHandler customerHandler() {
+
+        if (customerHandler == null) {
+            customerHandler = new CustomerHandler();
+            logger.debug("Creating Instance of CustomerHandler");
+        }
+        return customerHandler;
     }
 
 }
