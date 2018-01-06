@@ -1,7 +1,8 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
@@ -19,7 +20,6 @@ import org.mongodb.morphia.utils.IndexType;
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 public class Customer extends GenericEntity {
 
     private String fullName;

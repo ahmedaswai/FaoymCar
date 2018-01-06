@@ -1,18 +1,12 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.Driver;
-import com.qcar.model.mongo.FileStore;
-import com.qcar.model.mongo.Location;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.Driver;
+import com.qcar.model.mongo.embedded.FileStore;
+import com.qcar.model.mongo.embedded.Location;
 import com.qcar.service.cache.QCarCache;
-import org.mongodb.morphia.aggregation.GeoNear;
-import org.mongodb.morphia.query.Criteria;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.Sort;
-import org.mongodb.morphia.query.WhereCriteria;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DriverDao extends GenericDao<Driver>implements IDao<Driver>,IStatusDao{

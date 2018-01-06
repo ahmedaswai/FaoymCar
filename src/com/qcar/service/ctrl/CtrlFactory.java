@@ -7,6 +7,8 @@ public class CtrlFactory {
     private static transient volatile UserCtrl userCtrl;
     private static transient volatile DriverCtrl driverCtrl;
     private static transient volatile CustomerCtrl customerCtrl;
+    private static transient volatile OrderCtrl orderCtrl;
+
 
 
     private static final Logger logger= LoggerFactory.getLogger(CtrlFactory.class);
@@ -35,5 +37,13 @@ public class CtrlFactory {
             logger.debug("Creating Instance of CustomerCtrl");
         }
         return customerCtrl;
+    }
+    public static OrderCtrl orderCtrl() {
+
+        if (orderCtrl == null) {
+            orderCtrl = new OrderCtrl();
+            logger.debug("Creating Instance of OrderCtrl");
+        }
+        return orderCtrl;
     }
 }

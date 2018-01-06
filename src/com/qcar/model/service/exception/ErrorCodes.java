@@ -12,8 +12,11 @@ public enum ErrorCodes {
     INVALID_TOKEN(1004,"Invalid Token"),
     ERROR_UPLOAD(3000,"Error During Upload"),
     ERROR_DOWNLOAD(3001,"Error During Download"),
+    MONGO_SERVER_IS_DOWN(4000,"Mongo Server is Down"),
     UN_DEFINED_EXCEPTION(9001,"Undefined Exception"),
     SERVER_ROUTE_ERROR(9002,"Service Route is Invalid");
+
+
 
 
 

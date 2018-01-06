@@ -1,14 +1,12 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.GenericEntity;
-import com.qcar.model.mongo.Sequence;
+import com.qcar.model.mongo.entity.GenericEntity;
+import com.qcar.model.mongo.entity.Sequence;
 import com.mongodb.WriteConcern;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.service.cache.QCarCache;
-import com.qcar.utils.CollectionUtils;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.qcar.utils.Constants;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.Sort;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -33,7 +31,9 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
     public Datastore getDataStore() {
 
-       return DatabaseClient.INSTANCE.connect().db("qa-car").startScanning("com.qcar.model.mongo").
+       return DatabaseClient.INSTANCE.connect().
+               db(Constants.DB_NAME).
+               startScanning(Constants.MONGO_MODEL_CLS).
                 datastore();
 
     }
@@ -103,9 +103,10 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
         if (t != null) {
 
-            getCache().add(t);
+
             setId(t);
             getDataStore().save(t);
+            getCache().add(t);
         }
         return t;
     }
@@ -121,11 +122,12 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
     }
     public List<T>findAll(){
 
-        List<T>values=(List<T>)getCache().getAllByEntity(getEntity());
-        if(values!=null&&!values.isEmpty()){
-            return values;
+        if(getEntity().isCached()) {
+            List<T> values = (List<T>) getCache().getAllByEntity(getEntity());
+            if (values != null && !values.isEmpty()) {
+                return values;
+            }
         }
-
         Query<T> query = getDataStore().
                 createQuery(getEntityClass()).
                 order(Sort.descending(UPDATED_ON));
@@ -134,9 +136,11 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
 
     public Optional<T> findById(Long id) {
-        Optional<T> cached=(Optional<T>)getCache().get(id,getEntity());
-        if(cached!=null){
-            return cached;
+        if(getEntity().isCached()){
+            Optional<T> cached=(Optional<T>)getCache().get(id,getEntity());
+            if(cached!=null){
+                return cached;
+            }
         }
         T t = getDataStore().
                 createQuery(getEntityClass()).field(ID).
@@ -144,6 +148,8 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
         return Optional.ofNullable(t);
     }
+
+
 
     public QCarCache getCache() {
         return cache;

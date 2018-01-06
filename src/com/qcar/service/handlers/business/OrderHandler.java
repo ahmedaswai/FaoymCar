@@ -1,9 +1,9 @@
 package com.qcar.service.handlers.business;
 
-import com.qcar.dao.CustomerDao;
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.GenericDao;
-import com.qcar.model.mongo.entity.Customer;
+import com.qcar.dao.OrderDao;
+import com.qcar.model.mongo.entity.Order;
 import com.qcar.model.service.ServiceReturnList;
 import com.qcar.model.service.ServiceReturnSingle;
 import com.qcar.utils.MediaType;
@@ -12,17 +12,20 @@ import io.vertx.ext.web.RoutingContext;
 
 import java.util.List;
 
-public class CustomerHandler extends GenericHandler<Customer> {
+public class OrderHandler extends GenericHandler<Order> {
+    final OrderDao dao;
 
-    private final CustomerDao dao = DaoFactory.customerDao();
+    public OrderHandler() {
+        dao = DaoFactory.orderDao();
+    }
 
     @Override
-    public GenericDao<Customer> getDao() {
+    public GenericDao<Order> getDao() {
         return dao;
     }
 
     public void findAllActive(RoutingContext ctx) {
-        List<Customer> lst = dao.findAllActive();
+        List<Order> lst = dao.findAllActive();
 
         Buffer rs = ServiceReturnList.response(lst);
 
@@ -35,7 +38,7 @@ public class CustomerHandler extends GenericHandler<Customer> {
 
         Long id = Long.parseLong(ctx.request().getParam("id"));
 
-        Customer u = dao.changeStatus(id, true);
+        Order u = dao.changeStatus(id, true);
         Buffer rs = ServiceReturnSingle.response(u);
         ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 
@@ -46,12 +49,29 @@ public class CustomerHandler extends GenericHandler<Customer> {
 
         Long id = Long.parseLong(ctx.request().getParam("id"));
 
-        Customer u = dao.changeStatus(id, false);
+        Order u = dao.changeStatus(id, false);
         Buffer rs = ServiceReturnSingle.response(u);
         ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 
                 .setStatusCode(200).end(rs);
     }
 
+    public void findByOrderNum(RoutingContext ctx){
+        Long id = Long.parseLong(ctx.request().getParam("orderNum"));
+        Order o=dao.findByOrderNumber(id).get();
+        Buffer rs = ServiceReturnSingle.response(o);
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
 
+                .setStatusCode(200).end(rs);
+
+    }
+
+    public void findByCriteria(RoutingContext ctx){
+        Buffer rs = ServiceReturnSingle.response("Not implemented Yet");
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
+        //Long orderDateFrom=Long.parseLong(ctx.request().getParam("orderNum"));
+    }
 }

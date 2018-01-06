@@ -1,4 +1,4 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.entity;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;

@@ -1,4 +1,4 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.choicelist;
 
 import com.qcar.utils.GeneralUtils;
 
@@ -43,8 +43,4 @@ public enum Permission {
         return Arrays.stream(bitSet).mapToObj(i -> PERMISSION_MAP.get(i)).collect(Collectors.toList());
     }
 
-    public static void main(String[] args) {
-
-
-    }
 }

@@ -1,6 +1,6 @@
 package com.qcar.service.handlers.config;
 
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarSecurityException;
 import com.qcar.utils.Constants;

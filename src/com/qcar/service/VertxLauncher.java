@@ -3,6 +3,7 @@ package com.qcar.service;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import com.mongodb.*;
 import com.qcar.service.ctrl.CtrlFactory;
 import com.qcar.service.ctrl.CustomerCtrl;
 import com.qcar.service.ctrl.DriverCtrl;
@@ -10,6 +11,7 @@ import com.qcar.service.ctrl.UserCtrl;
 import com.qcar.service.handlers.HandlerFactory;
 import com.qcar.service.handlers.config.ConfigHandler;
 import com.qcar.service.handlers.config.SecurityHandler;
+import com.qcar.utils.Constants;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
@@ -19,10 +21,14 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.SLF4JLogDelegateFactory;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
+import org.bson.BSONObject;
+import org.bson.conversions.Bson;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import org.mongodb.morphia.logging.slf4j.SLF4JLoggerImplFactory;
+import org.slf4j.LoggerFactory;
 
 import static io.vertx.core.logging.LoggerFactory.LOGGER_DELEGATE_FACTORY_CLASS_NAME;
 
@@ -34,6 +40,7 @@ public class VertxLauncher extends AbstractVerticle {
 
     private final Vertx vertx = Vertx.vertx();
 
+    private static final org.slf4j.Logger logger= LoggerFactory.getLogger(VertxLauncher.class);
 
 
     private void initLog(){
@@ -50,6 +57,7 @@ public class VertxLauncher extends AbstractVerticle {
         CtrlFactory.userCtrl().registerHandler(router);
         CtrlFactory.driverCtrl().registerHandler(router);
         CtrlFactory.customerCtrl().registerHandler(router);
+        CtrlFactory.orderCtrl().registerHandler(router);
 
     }
     private void initSecurityHandler(Router router){
@@ -61,15 +69,13 @@ public class VertxLauncher extends AbstractVerticle {
     public void start(Future<Void> startFuture) {
 
 
-
-
         initLog();
 
         HttpServer server = vertx.createHttpServer();
 
         Router mainRouter = Router.router(vertx);
 
-        configRouter(mainRouter);
+        configServer(mainRouter);
 
         initSecurityHandler(mainRouter);
 
@@ -95,8 +101,11 @@ public class VertxLauncher extends AbstractVerticle {
 
     }
 
-    private void configRouter(Router router){
+    private void configServer(Router router){
+
+        checkMongoServer(vertx);
         router.route().handler(new ConfigHandler());
+
         router.route().handler(CorsHandler.create("*")
                 .allowedMethod(HttpMethod.GET)
                 .allowedMethod(HttpMethod.POST)
@@ -113,6 +122,20 @@ public class VertxLauncher extends AbstractVerticle {
     @Override
     public void stop(Future<Void> stopFuture) {
         vertx.close(res -> vertx.close(stopFuture.completer()));
+    }
+
+    private void checkMongoServer(Vertx vertx){
+
+        try {
+            MongoClient mongo = new MongoClient();
+            Bson ping = new BasicDBObject("ping", "1");
+            mongo.getDatabase(Constants.DB_NAME).runCommand(ping);
+        } catch (MongoException e) {
+            logger.error("Mongo Server is not working",e);
+            vertx.deploymentIDs().forEach(vertx::undeploy);
+            System.exit(-9);
+
+        }
     }
 
     @Override

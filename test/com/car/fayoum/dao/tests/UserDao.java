@@ -1,7 +1,7 @@
 package com.car.fayoum.dao.tests;
 
 import com.qcar.dao.DaoFactory;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.utils.SecurityUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

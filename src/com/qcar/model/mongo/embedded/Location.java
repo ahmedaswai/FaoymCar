@@ -1,4 +1,4 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.embedded;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

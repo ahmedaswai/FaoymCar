@@ -3,16 +3,14 @@ package com.qcar.service.handlers.business;
 import com.qcar.dao.DaoFactory;
 import com.qcar.dao.GenericDao;
 import com.qcar.dao.UserDao;
-import com.qcar.model.mongo.Driver;
-import com.qcar.model.mongo.Permission;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.choicelist.Permission;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.model.service.LoginResult;
 import com.qcar.model.service.ServiceReturnList;
 import com.qcar.model.service.ServiceReturnMap;
 import com.qcar.model.service.ServiceReturnSingle;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarSecurityException;
-import com.qcar.utils.CollectionUtils;
 import com.qcar.utils.JwtTokenUtil;
 import com.qcar.utils.MediaType;
 import com.qcar.utils.SecurityUtils;
@@ -26,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created by ahmedissawi on 12/28/17.
@@ -64,7 +60,16 @@ public class UserHandler extends GenericHandler<User> {
 
                 .setStatusCode(200).end(rs);
     }
+    public void doHashPass(RoutingContext ctx){
+        String password=ctx.request().getParam("pass");
+        String hashedPassword= SecurityUtils.hashPassword(password);
+        Buffer rs = ServiceReturnSingle.response(hashedPassword);
+        ctx.response().
+                putHeader("content-type", MediaType.APPLICATION_JSON)
 
+                .setStatusCode(200).end(rs);
+
+    }
     public void doAdd(RoutingContext ctx){
 
 

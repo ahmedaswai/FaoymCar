@@ -1,5 +1,6 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.choicelist;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum UserType {

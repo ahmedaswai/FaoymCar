@@ -1,13 +1,10 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qcar.model.service.ClientInfo;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ahmedissawi on 12/6/17.
@@ -77,6 +74,10 @@ public abstract class GenericEntity {
         return sb.toString();
     }
 
+    @JsonIgnore
+    public Boolean isCached(){
+        return true;
+    }
     public abstract String getCollectionName();
     public  GenericEntity updatedCachedEntity(){
         return this;

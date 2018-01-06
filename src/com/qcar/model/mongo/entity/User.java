@@ -1,10 +1,10 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.qcar.model.mongo.choicelist.Permission;
+import com.qcar.model.mongo.choicelist.UserType;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Entity(value = "users", noClassnameStored = true)
 @Indexes(
         {
-                @Index(value = "id", fields = @Field(value = "id"))
+                 @Index(value = "id", fields = @Field(value = "id"))
                 , @Index(value = "updatedOn", fields = @Field(value = "updatedOn", type = IndexType.DESC))
                 , @Index(value = "loginName", fields = @Field("loginName"), options = @IndexOptions(unique = true))
         }

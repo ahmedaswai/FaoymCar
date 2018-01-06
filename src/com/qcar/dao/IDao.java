@@ -1,7 +1,6 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.GenericEntity;
-import org.mongodb.morphia.Datastore;
+import com.qcar.model.mongo.entity.GenericEntity;
 
 import java.util.List;
 

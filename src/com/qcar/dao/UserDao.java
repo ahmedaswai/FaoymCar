@@ -1,15 +1,11 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.Customer;
-import com.qcar.model.mongo.GenericEntity;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.service.cache.QCarCache;
 import com.qcar.utils.CollectionUtils;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.UpdateOperations;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.Optional;
 

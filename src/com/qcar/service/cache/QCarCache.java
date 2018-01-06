@@ -1,13 +1,12 @@
 package com.qcar.service.cache;
 
 
-import com.qcar.model.mongo.GenericEntity;
+import com.qcar.model.mongo.entity.GenericEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class QCarCache {
@@ -51,7 +50,7 @@ public final class QCarCache {
     }
 
     public Boolean add(GenericEntity entity){
-        if(entity==null||!useCache)return false;
+        if(entity==null||!useCache||!entity.isCached())return false;
 
         logger.info("Updating  Cache Instance  {} with Id {} ",entity.getCollectionName(),entity.getId());
 
@@ -76,13 +75,18 @@ public final class QCarCache {
     }
 
     public Boolean removeItem(GenericEntity entity,Long id){
-        logger.info("Removing from Cache Instance  List {} with Id{} ",entity.getCollectionName(),id);
+        if(entity.isCached()) {
 
-        GenericEntity cachedEntity=cache.get(entity.getCollectionName()).get(id);
-        if(cachedEntity!=null){
-            cache.get(entity.getCollectionName()).remove(id);
+
+            logger.info("Removing from Cache Instance  List {} with Id{} ", entity.getCollectionName(), id);
+
+            GenericEntity cachedEntity = cache.get(entity.getCollectionName()).get(id);
+            if (cachedEntity != null) {
+                cache.get(entity.getCollectionName()).remove(id);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public Boolean getUseCache() {

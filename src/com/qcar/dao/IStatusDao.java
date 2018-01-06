@@ -1,9 +1,6 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.Customer;
-import com.qcar.model.mongo.GenericEntity;
-import com.qcar.model.mongo.User;
-import org.mongodb.morphia.Datastore;
+import com.qcar.model.mongo.entity.GenericEntity;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 

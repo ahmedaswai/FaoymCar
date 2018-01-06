@@ -1,6 +1,6 @@
 package com.qcar.dao;
 
-import com.qcar.model.mongo.Customer;
+import com.qcar.model.mongo.entity.Customer;
 import com.qcar.service.cache.QCarCache;
 
 import java.util.List;
@@ -12,9 +12,7 @@ public class CustomerDao extends GenericDao<Customer> implements IDao<Customer>,
         super(cache);
     }
 
-    public static final String CURRENT_LOCATION = "currentLocation";
-    public static final String STATUS = "status";
-    public static final String ONLINE = "online";
+
 
     @Override
     public List<Customer> findByExample(Customer driver) {

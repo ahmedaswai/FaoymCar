@@ -1,7 +1,9 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.qcar.model.mongo.embedded.FileStore;
+import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 

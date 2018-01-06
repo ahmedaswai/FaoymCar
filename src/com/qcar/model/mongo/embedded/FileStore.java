@@ -1,4 +1,4 @@
-package com.qcar.model.mongo;
+package com.qcar.model.mongo.embedded;
 
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarException;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class FileStore {

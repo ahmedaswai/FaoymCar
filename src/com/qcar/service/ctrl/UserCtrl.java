@@ -32,6 +32,11 @@ public class UserCtrl implements ICtrl {
 
                 .handler(handler::doLogin);
 
+        mainRouter.get()
+                .path("/hash/:pass")
+                .produces(MediaType.APPLICATION_JSON)
+                .handler(handler::doHashPass);
+
         mainRouter.post()
                 .path(getRoute("password/reset"))
                 .produces(MediaType.APPLICATION_JSON)

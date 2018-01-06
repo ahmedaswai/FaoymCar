@@ -1,24 +1,19 @@
 package com.qcar.service.handlers.business;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.qcar.dao.GenericDao;
-import com.qcar.model.mongo.Driver;
-import com.qcar.model.mongo.GenericEntity;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.entity.GenericEntity;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.model.service.ClientInfo;
 import com.qcar.model.service.ServiceReturnList;
 import com.qcar.model.service.ServiceReturnMap;
 import com.qcar.model.service.ServiceReturnSingle;
 import com.qcar.utils.CollectionUtils;
 import com.qcar.utils.MediaType;
-import com.qcar.utils.SecurityUtils;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.RoutingContext;
 
-import java.time.Instant;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;

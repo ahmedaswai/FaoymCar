@@ -1,17 +1,13 @@
 package com.qcar.utils;
 
-import com.qcar.model.mongo.Permission;
-import com.qcar.model.mongo.User;
+import com.qcar.model.mongo.choicelist.Permission;
+import com.qcar.model.mongo.entity.User;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarSecurityException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.nio.charset.Charset;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 
 public final class JwtTokenUtil {
