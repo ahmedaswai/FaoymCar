@@ -4,7 +4,7 @@ import com.qcar.model.mongo.entity.User;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarSecurityException;
 import com.qcar.utils.Constants;
-import com.qcar.utils.JwtTokenUtil;
+import com.qcar.security.JwtTokenUtil;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 

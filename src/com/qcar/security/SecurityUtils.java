@@ -1,4 +1,4 @@
-package com.qcar.utils;
+package com.qcar.security;
 
 import org.mindrot.jbcrypt.BCrypt;
 
