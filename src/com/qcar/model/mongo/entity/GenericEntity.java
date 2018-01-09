@@ -1,7 +1,7 @@
 package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.qcar.model.service.ClientInfo;
+import com.qcar.model.mongo.embedded.ClientInfo;
 import org.mongodb.morphia.annotations.Id;
 
 import java.util.Date;

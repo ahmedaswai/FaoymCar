@@ -1,11 +1,14 @@
 package com.qcar.model.mongo.embedded;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.vertx.core.MultiMap;
 
 /**
  * Created by ahmedissawi on 12/6/17.
  */
 public class    Location {
+
+    private Long range;
 
     private Double[] coordinates = new Double[2];
 
@@ -14,10 +17,14 @@ public class    Location {
     public Location() {
 
     }
+    public static final Location instance(MultiMap mp,String locKey){
+        double lng=Double.parseDouble(mp.get(locKey+"Lng"));
+        double lat=Double.parseDouble(mp.get(locKey+"Lat"));
+        long range=Long.parseLong(mp.get(locKey+"Range"));
 
-    public Location(Double lng, Double lat) {
-
-        this.coordinates = new Double[]{lng, lat};
+       return new Location()
+               .coordinates(new Double[]{lng,lat})
+               .range(range);
 
     }
 
@@ -25,16 +32,21 @@ public class    Location {
         return coordinates;
     }
 
-    public void setCoordinates(Double[] coordinates) {
+    public Location coordinates(Double[] coordinates) {
+
         this.coordinates = coordinates;
+        return this;
     }
+
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public Location type(String type) {
+
         this.type = type;
+        return this;
     }
     @JsonIgnore
     public Double getLat(){
@@ -45,4 +57,22 @@ public class    Location {
         return coordinates[0];
     }
 
+    @JsonIgnore
+    public Long getRange() {
+        return range;
+    }
+    @JsonIgnore
+    public Double getRadius(){
+        return (range/1000)/6378.1;
+
+    }
+    public static final Double getRadius(Long meters){
+        return (meters/1000)/6378.1;
+
+    }
+
+    public Location range(Long range) {
+        this.range = range;
+        return this;
+    }
 }

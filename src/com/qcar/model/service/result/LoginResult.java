@@ -1,4 +1,4 @@
-package com.qcar.model.service;
+package com.qcar.model.service.result;
 
 public enum LoginResult {
 

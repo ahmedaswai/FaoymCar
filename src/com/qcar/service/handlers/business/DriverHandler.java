@@ -6,8 +6,8 @@ import com.qcar.dao.GenericDao;
 import com.qcar.model.mongo.entity.Driver;
 import com.qcar.model.mongo.embedded.FileStore;
 import com.qcar.model.mongo.embedded.Location;
-import com.qcar.model.service.ServiceReturnList;
-import com.qcar.model.service.ServiceReturnSingle;
+import com.qcar.model.service.result.ServiceReturnList;
+import com.qcar.model.service.result.ServiceReturnSingle;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarException;
 import com.qcar.utils.MediaType;
@@ -41,11 +41,14 @@ public class DriverHandler extends GenericHandler<Driver>{
 
         Double lng=Double.parseDouble(ctx.request().getParam("lng"));
         Double lat=Double.parseDouble(ctx.request().getParam("lat"));
-        Double radius=Double.parseDouble(ctx.request().getParam("radius"));
+        Long radius=Long.parseLong(ctx.request().getParam("radius"));
 
 
-
-        List<Driver> lst = dao.findInDistance(new Location(lng,lat),radius);
+        Location loc=new Location().
+                coordinates(
+                new Double[]{lng,lat}).
+                range(radius);
+        List<Driver> lst = dao.findInDistance(loc);
 
         Buffer rs = ServiceReturnList.response(lst);
 

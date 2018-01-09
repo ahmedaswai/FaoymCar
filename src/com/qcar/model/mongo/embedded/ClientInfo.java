@@ -1,7 +1,6 @@
-package com.qcar.model.service;
+package com.qcar.model.mongo.embedded;
 
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.ext.web.RoutingContext;
 
 public final class ClientInfo {
 

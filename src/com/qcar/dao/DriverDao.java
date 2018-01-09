@@ -24,13 +24,12 @@ public class DriverDao extends GenericDao<Driver>implements IDao<Driver>,IStatus
     }
 
 
-    public List<Driver>findInDistance(Location loc,Double meters){
+    public List<Driver>findInDistance(Location loc){
 
 
-        Double metersToRadians=(meters/1000)/6378.1;
         Query<Driver>q= getDataStore().createQuery(Driver.class).
                field(CURRENT_LOCATION).
-                near(loc.getLng(),loc.getLat(),metersToRadians,true).
+                near(loc.getLng(),loc.getLat(),loc.getRadius(),true).
                 order(Sort.descending(ONLINE));
 
        return q.asList();

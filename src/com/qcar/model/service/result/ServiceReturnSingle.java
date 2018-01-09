@@ -1,25 +1,19 @@
-package com.qcar.model.service;
+package com.qcar.model.service.result;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qcar.utils.CollectionUtils;
 import com.qcar.utils.Constants;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.Json;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.util.List;
 
 /**
  * Created by ahmedissawi on 12/28/17.
  */
-public class ServiceReturnList<T> {
-    private ServiceReturnList() {
+public class ServiceReturnSingle<T> {
+    private ServiceReturnSingle() {
 
     }
-
-
-    @JsonProperty("c")
-    private Integer count=0;
 
     @JsonProperty("sc")
     private Integer statusCode;
@@ -28,14 +22,14 @@ public class ServiceReturnList<T> {
     private String version = Constants.VERSION;
 
     @JsonProperty("rs")
-    private List<T> result;
+    private T result;
 
 
     public Integer getStatusCode() {
         return statusCode;
     }
 
-    public List<T> getResult() {
+    public T getResult() {
         return result;
     }
 
@@ -43,13 +37,12 @@ public class ServiceReturnList<T> {
         return version;
     }
 
-    public static final Buffer response(List<?> list) {
-        ServiceReturnList returnSingle = new ServiceReturnList();
-        returnSingle.result = list;
+    public static final Buffer response(Object t) {
+        ServiceReturnSingle returnSingle = new ServiceReturnSingle();
+        returnSingle.result = t;
         returnSingle.statusCode = HttpsURLConnection.HTTP_OK;
-        if(!CollectionUtils.isEmpty(list)){
-            returnSingle.count=list.size();
-        }
         return Json.encodeToBuffer(returnSingle);
     }
+
+
 }

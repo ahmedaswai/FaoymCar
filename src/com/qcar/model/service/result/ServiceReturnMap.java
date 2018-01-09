@@ -1,4 +1,4 @@
-package com.qcar.model.service;
+package com.qcar.model.service.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qcar.utils.Constants;

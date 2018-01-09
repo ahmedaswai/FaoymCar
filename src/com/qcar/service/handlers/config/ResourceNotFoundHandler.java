@@ -1,6 +1,6 @@
 package com.qcar.service.handlers.config;
 
-import com.qcar.model.service.ServiceError;
+import com.qcar.model.service.result.ServiceError;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarException;
 import com.qcar.utils.MediaType;

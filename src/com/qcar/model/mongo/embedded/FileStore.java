@@ -96,6 +96,7 @@ public final class FileStore {
         this.extension = extension;
         return this;
     }
+
     public FileStore viewUrl(String viewUrl) {
         this.viewUrl = viewUrl;
         return this;

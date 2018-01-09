@@ -1,4 +1,4 @@
-package com.qcar.model.service;
+package com.qcar.model.service.result;
 
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.utils.Constants;
