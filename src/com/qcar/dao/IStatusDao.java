@@ -16,7 +16,7 @@ public interface IStatusDao<T extends GenericEntity> {
         UpdateOperations<T> updateOperations=dao.getDataStore(). createUpdateOperations(cls).set(STATUS,status);
         T t= dao.getDataStore().findAndModify(query,updateOperations);
         dao.getCache().add(t);
-        return t;
+        return cls.cast(t);
     }
 
     default List<T> findAllActive(GenericDao dao, Class<T> t) {
