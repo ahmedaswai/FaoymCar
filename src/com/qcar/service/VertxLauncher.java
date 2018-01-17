@@ -43,6 +43,7 @@ public class VertxLauncher extends AbstractVerticle {
     private static final org.slf4j.Logger logger= LoggerFactory.getLogger(VertxLauncher.class);
 
 
+
     private void initLog(){
         System.setProperty(LOGGER_DELEGATE_FACTORY_CLASS_NAME, SLF4JLogDelegateFactory.class.getName());
         LoggerContext loggerContext = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
@@ -58,6 +59,7 @@ public class VertxLauncher extends AbstractVerticle {
         CtrlFactory.driverCtrl().registerHandler(router);
         CtrlFactory.customerCtrl().registerHandler(router);
         CtrlFactory.orderCtrl().registerHandler(router);
+        CtrlFactory.tripCtrl().registerHandler(router);
 
     }
     private void initSecurityHandler(Router router){

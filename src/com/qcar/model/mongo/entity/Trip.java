@@ -1,6 +1,7 @@
 package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
@@ -22,12 +23,13 @@ import java.util.Date;
 
 
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class Trip extends GenericEntity {
 
     private Location startLoc;
     private Location endLoc;
-    @Reference
-    private Customer customer;
+
 
     @Reference
     private Driver driver;
@@ -62,15 +64,6 @@ public class Trip extends GenericEntity {
 
     public Trip endLoc(Location endLoc) {
         this.endLoc = endLoc;
-        return this;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Trip customer(Customer customer) {
-        this.customer = customer;
         return this;
     }
 
@@ -181,7 +174,14 @@ public class Trip extends GenericEntity {
         this.notes = notes;
         return this;
     }
+    public static final Trip instance(){
+        return new Trip();
+    }
 
+    @JsonIgnore
+    public Boolean isCached(){
+        return false;
+    }
     @Override
     @JsonIgnore
     public String getCollectionName() {

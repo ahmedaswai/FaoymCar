@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qcar.model.mongo.entity.Customer;
 import com.qcar.model.mongo.entity.Order;
+import com.qcar.model.mongo.entity.Trip;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,9 +43,16 @@ public class GeneralUtils {
         assertEquals(1, 1);
     }
     @Test
-    @Ignore
     public void testJsonOrder() throws JsonProcessingException {
         Order order = Order.instance();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+        System.out.println(mapper.writeValueAsString(order));
+        assertEquals(1, 1);
+    }
+    @Test
+    public void testJsonTrip() throws JsonProcessingException {
+        Trip order = Trip.instance();
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         System.out.println(mapper.writeValueAsString(order));

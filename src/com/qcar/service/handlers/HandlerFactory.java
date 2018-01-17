@@ -1,10 +1,7 @@
 package com.qcar.service.handlers;
 
 import com.qcar.service.ctrl.CtrlFactory;
-import com.qcar.service.handlers.business.CustomerHandler;
-import com.qcar.service.handlers.business.DriverHandler;
-import com.qcar.service.handlers.business.OrderHandler;
-import com.qcar.service.handlers.business.UserHandler;
+import com.qcar.service.handlers.business.*;
 import com.qcar.service.handlers.config.QCarErrorHandler;
 import com.qcar.service.handlers.config.ResourceNotFoundHandler;
 import com.qcar.service.handlers.config.SecurityHandler;
@@ -23,6 +20,8 @@ public class HandlerFactory {
     private static transient volatile DriverHandler driverHandler;
     private static transient volatile CustomerHandler customerHandler;
     private static transient volatile OrderHandler orderHandler;
+    private static transient volatile TripHandler tripHandler;
+
 
 
 
@@ -86,6 +85,14 @@ public class HandlerFactory {
             logger.debug("Creating Instance of OrderHandler");
         }
         return orderHandler;
+    }
+    public static TripHandler tripHandler() {
+
+        if (tripHandler == null) {
+            tripHandler = new TripHandler();
+            logger.debug("Creating Instance of TripHandler");
+        }
+        return tripHandler;
     }
 
 }

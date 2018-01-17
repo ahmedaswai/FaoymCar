@@ -13,6 +13,8 @@ public class DaoFactory {
     private static transient volatile DriverDao driverDao;
     private static transient volatile CustomerDao customerDao;
     private static transient volatile OrderDao orderDao;
+    private static transient volatile TripDao tripDao;
+
 
 
     private static final QCarCache qCarCache=QCarCache.instance();
@@ -55,5 +57,14 @@ public class DaoFactory {
             logger.debug("Creating Instance of OrderDao");
         }
         return orderDao;
+    }
+
+    public static TripDao tripDao() {
+
+        if (tripDao == null) {
+            tripDao = new TripDao(qCarCache);
+            logger.debug("Creating Instance of TripDao");
+        }
+        return tripDao;
     }
 }
