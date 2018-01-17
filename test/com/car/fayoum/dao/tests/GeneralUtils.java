@@ -43,6 +43,7 @@ public class GeneralUtils {
         assertEquals(1, 1);
     }
     @Test
+    @Ignore
     public void testJsonOrder() throws JsonProcessingException {
         Order order = Order.instance();
         ObjectMapper mapper = new ObjectMapper();
