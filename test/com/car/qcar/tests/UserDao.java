@@ -1,4 +1,4 @@
-package com.car.fayoum.dao.tests;
+package com.car.qcar.tests;
 
 import com.qcar.dao.DaoFactory;
 import com.qcar.model.mongo.entity.User;

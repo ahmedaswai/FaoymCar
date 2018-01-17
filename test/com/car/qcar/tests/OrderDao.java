@@ -1,4 +1,4 @@
-package com.car.fayoum.dao.tests;
+package com.car.qcar.tests;
 
 
 import org.junit.Test;
