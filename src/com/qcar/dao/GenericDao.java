@@ -1,6 +1,7 @@
 package com.qcar.dao;
 
 import com.qcar.model.mongo.entity.GenericEntity;
+import com.qcar.model.mongo.entity.Order;
 import com.qcar.model.mongo.entity.Sequence;
 import com.mongodb.WriteConcern;
 import com.qcar.model.mongo.entity.User;
@@ -10,7 +11,10 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.Sort;
 import org.mongodb.morphia.query.UpdateOperations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,7 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
     public static final String ID = "id";
     public static final String UPDATED_ON = "updatedOn";
+    private static final Logger logger= LoggerFactory.getLogger(GenericDao.class);
 
     private final QCarCache cache;
 
@@ -103,8 +108,8 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
         if (t != null) {
 
-
             setId(t);
+            prepareAdd(t);
             getDataStore().save(t);
             getCache().add(t);
         }
@@ -157,8 +162,22 @@ public abstract class GenericDao<T extends GenericEntity> implements IDao<T> {
 
     abstract public Class<T> getEntityClass();
     abstract public T getEntity();
+     public void prepareAdd(T t){
+         logger.debug("Starting Preparing Entity {} Id {} for saving",t.getCollectionName(),t.getId());
 
+     }
 
+    public Long getUniqueSerial(T t){
+
+            Integer year= LocalDateTime.now().getYear();
+            String id=t.getId().toString();
+            StringBuilder idbt=new StringBuilder();
+            for(int count=id.length();count<6;count++){
+                idbt.append(0);
+            }
+            String orderNum=String.join("",year.toString(),idbt,id);
+            return Long.parseLong(orderNum);
+        }
 
     public void populateCache(){
         cache.addToCache(getEntity(),findAll());

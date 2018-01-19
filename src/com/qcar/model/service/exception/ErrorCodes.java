@@ -14,11 +14,8 @@ public enum ErrorCodes {
     ERROR_DOWNLOAD(3001,"Error During Download"),
     MONGO_SERVER_IS_DOWN(4000,"Mongo Server is Down"),
     UN_DEFINED_EXCEPTION(9001,"Undefined Exception"),
-    SERVER_ROUTE_ERROR(9002,"Service Route is Invalid");
-
-
-
-
+    SERVER_ROUTE_ERROR(9002,"Service Route is Invalid"),
+    ENTITY_NOT_FOUND(1003,"Entity is not found");
 
 
 

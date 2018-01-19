@@ -2,6 +2,7 @@ package com.qcar.model.mongo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.qcar.model.mongo.choicelist.TripStatus;
 import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
@@ -14,7 +15,10 @@ import java.util.Date;
 
 @Entity(value = "trips",noClassnameStored = true)
 @Indexes(
-                {@Index(value = "id", fields = @Field("id")),
+                {
+                 @Index(value = "id", fields = @Field("id")),
+
+                @Index(value = "tripNumber",options = @IndexOptions(unique = true), fields = @Field(value = "tripNumber",type = IndexType.DESC)),
                 @Index(value = "startLoc", fields = @Field(value = "startLoc", type = IndexType.GEO2DSPHERE)),
                 @Index(value = "endLoc", fields = @Field(value = "endLoc", type = IndexType.GEO2DSPHERE)),
                  @Index(value = "actualStartTime", fields = @Field(value = "actualStartTime",type =IndexType.DESC)),
@@ -38,7 +42,7 @@ public class Trip extends GenericEntity {
     private Order order;
 
 
-    private Integer status;
+    private TripStatus status;
     private Date propsedStartTime;
     private Date propsedEndTime;
     private Double propsedDistance;
@@ -48,6 +52,9 @@ public class Trip extends GenericEntity {
     private Double actualCost;
     private Double actualDistance;
     private String notes;
+    private Long tripNumber;
+    // waiting time in minutes
+    private Long waitingTime;
 
     public Location getStartLoc() {
         return startLoc;
@@ -85,11 +92,11 @@ public class Trip extends GenericEntity {
         return this;
     }
 
-    public Integer getStatus() {
+    public TripStatus getStatus() {
         return status;
     }
 
-    public Trip satus(Integer status) {
+    public Trip satus(TripStatus status) {
         this.status = status;
         return this;
     }
@@ -182,9 +189,28 @@ public class Trip extends GenericEntity {
     public Boolean isCached(){
         return false;
     }
+
+    public Long getTripNumber() {
+        return tripNumber;
+    }
+
+    public Trip tripNumber(Long tripNumber) {
+        this.tripNumber = tripNumber;
+        return this;
+    }
+
     @Override
     @JsonIgnore
     public String getCollectionName() {
         return "trips";
+    }
+
+    public Long getWaitingTime() {
+        return waitingTime;
+    }
+
+    public Trip waitingTime(Long waitingTime) {
+        this.waitingTime = waitingTime;
+        return this;
     }
 }

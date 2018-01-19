@@ -2,7 +2,9 @@ package com.qcar.service.ctrl;
 
 import com.qcar.service.handlers.HandlerFactory;
 import com.qcar.service.handlers.business.TripHandler;
+import com.qcar.utils.MediaType;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.BodyHandler;
 
 public class TripCtrl implements ICtrl{
 
@@ -17,6 +19,24 @@ public class TripCtrl implements ICtrl{
     public void registerHandler(Router mainRouter) {
 
         registerDefaultRoutes(handler,mainRouter);
+
+        mainRouter.get()
+                .path(getRoute("trip-num/:tripNum"))
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(handler::findByTripNum);
+
+        mainRouter.get()
+                .path(getRoute("trip-status/:tripStatus"))
+                .produces(MediaType.APPLICATION_JSON)
+
+                .handler(handler::findByTripStatus);
+
+        mainRouter.put()
+                .path(getRoute("trip-status"))
+                .handler(BodyHandler.create())
+                .produces(MediaType.APPLICATION_JSON)
+                .handler(handler::changeStatus);
 
     }
 

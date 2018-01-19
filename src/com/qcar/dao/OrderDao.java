@@ -56,27 +56,15 @@ public class OrderDao extends GenericDao<Order> implements IDao<Order>, IStatusD
 
         return Optional.ofNullable(t);
     }
+
+
     @Override
-    public Order save(Order order) {
-        if (order != null) {
-            setId(order);
-            setOrderId(order);
-            getDataStore().save(order);
+    public void prepareAdd(Order order){
+        Long orderNumber=getUniqueSerial(order);
+        order.orderNum(orderNumber);
 
-        }
-        return order;
     }
 
-    private void setOrderId(Order order){
-        Integer year= LocalDateTime.now().getYear();
-        String id=order.getId().toString();
-        StringBuilder idbt=new StringBuilder();
-        for(int count=id.length();count<6;count++){
-            idbt.append(0);
-        }
-        String orderNum=String.join("",year.toString(),idbt,id);
-        order.orderNum(Long.parseLong(orderNum));
-    }
     public List<Order> findAllActive() {
 
         return findAllActive(this, Order.class);
