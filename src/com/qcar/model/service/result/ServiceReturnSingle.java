@@ -40,18 +40,19 @@ public class ServiceReturnSingle<T> {
         return version;
     }
 
-    public static final Buffer response(Object t) {
+    public static final <T>  Buffer response(T t) {
+
         if(t instanceof Optional){
-            return response((Optional<Object>) t);
+            return response((Optional<T>)t);
         }
         ServiceReturnSingle returnSingle = new ServiceReturnSingle();
         returnSingle.result = t;
         returnSingle.statusCode = HttpsURLConnection.HTTP_OK;
         return Json.encodeToBuffer(returnSingle);
     }
-    private static final Buffer response(Optional<Object> t) {
+    private static final <T>Buffer response(Optional<T> t) {
 
-        if(!t.isPresent()){
+        if(!t.isPresent()){ 
             throw new QCarException(ErrorCodes.ENTITY_NOT_FOUND);
         }
         ServiceReturnSingle returnSingle = new ServiceReturnSingle();
