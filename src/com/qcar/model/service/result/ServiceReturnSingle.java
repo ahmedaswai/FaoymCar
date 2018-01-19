@@ -52,7 +52,7 @@ public class ServiceReturnSingle<T> {
     }
     private static final <T>Buffer response(Optional<T> t) {
 
-        if(!t.isPresent()){ 
+        if(!t.isPresent()){
             throw new QCarException(ErrorCodes.ENTITY_NOT_FOUND);
         }
         ServiceReturnSingle returnSingle = new ServiceReturnSingle();
