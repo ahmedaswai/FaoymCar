@@ -43,10 +43,10 @@ public class Trip extends GenericEntity {
 
 
     private TripStatus status;
-    private Date propsedStartTime;
-    private Date propsedEndTime;
-    private Double propsedDistance;
-    private Double propsedCost;
+    private Date proposedStartTime;
+    private Date proposedEndTime;
+    private Double proposedDistance;
+    private Double proposedCost;
     private Date actualStartTime;
     private Date actualEndTime;
     private Double actualCost;
@@ -101,39 +101,39 @@ public class Trip extends GenericEntity {
         return this;
     }
 
-    public Date getPropsedStartTime() {
-        return propsedStartTime;
+    public Date getProposedStartTime() {
+        return proposedStartTime;
     }
 
-    public Trip propsedStartTime(Date propsedStartTime) {
-        this.propsedStartTime = propsedStartTime;
+    public Trip proposedStartTime(Date proposedStartTime) {
+        this.proposedStartTime = proposedStartTime;
         return this;
     }
 
-    public Date getPropsedEndTime() {
-        return propsedEndTime;
+    public Date getProposedEndTime() {
+        return proposedEndTime;
     }
 
-    public Trip propsedEndTime(Date propsedEndTime) {
-        this.propsedEndTime = propsedEndTime;
+    public Trip proposedEndTime(Date proposedEndTime) {
+        this.proposedEndTime = proposedEndTime;
         return this;
     }
 
-    public Double getPropsedDistance() {
-        return propsedDistance;
+    public Double getProposedDistance() {
+        return proposedDistance;
     }
 
-    public Trip propsedDistance(Double propsedDistance) {
-        this.propsedDistance = propsedDistance;
+    public Trip proposedDistance(Double proposedDistance) {
+        this.proposedDistance = proposedDistance;
         return this;
     }
 
-    public Double getPropsedCost() {
-        return propsedCost;
+    public Double getProposedCost() {
+        return proposedCost;
     }
 
-    public Trip propsedCost(Double propsedCost) {
-        this.propsedCost = propsedCost;
+    public Trip proposedCost(Double proposedCost) {
+        this.proposedCost = proposedCost;
         return this;
     }
 

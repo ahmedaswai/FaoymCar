@@ -15,6 +15,8 @@ public class TripDao  extends GenericDao<Trip> implements IDao<Trip> {
 
     public static final String TRIP_NUMBER="tripNumber";
     public static final String TRIP_STATUS="status";
+    public static final String ACTUAL_START_TIME="actualStartTime";
+
 
 
     @Override

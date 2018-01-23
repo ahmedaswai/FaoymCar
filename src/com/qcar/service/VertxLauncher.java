@@ -60,6 +60,7 @@ public class VertxLauncher extends AbstractVerticle {
         CtrlFactory.customerCtrl().registerHandler(router);
         CtrlFactory.orderCtrl().registerHandler(router);
         CtrlFactory.tripCtrl().registerHandler(router);
+        CtrlFactory.dashboardCtrl().registerHandler(router);
 
     }
     private void initSecurityHandler(Router router){
@@ -117,7 +118,13 @@ public class VertxLauncher extends AbstractVerticle {
                 .allowedMethod(HttpMethod.PATCH)
                 .allowedMethod(HttpMethod.HEAD)
                 .allowedHeader("X-PINGARUNER")
-                .allowedHeader("Content-Type"));
+                .allowedHeader("Content-Type")
+                .allowedHeader("Access-Control-Request-Method")
+                .allowedHeader("Access-Control-Allow-Credentials")
+                .allowedHeader("Access-Control-Allow-Origin")
+                .allowedHeader("Access-Control-Allow-Headers")
+
+                .allowedHeader(Constants.AUTHENTICATION_HEADER));
 
     }
 

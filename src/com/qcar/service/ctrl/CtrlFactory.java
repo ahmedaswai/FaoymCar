@@ -9,6 +9,7 @@ public class CtrlFactory {
     private static transient volatile CustomerCtrl customerCtrl;
     private static transient volatile OrderCtrl orderCtrl;
     private static transient volatile TripCtrl tripCtrl;
+    private static transient volatile DashboardCtrl dashboardCtrl;
 
 
 
@@ -54,5 +55,13 @@ public class CtrlFactory {
             logger.debug("Creating Instance of TripCtrl");
         }
         return tripCtrl;
+    }
+    public static DashboardCtrl dashboardCtrl() {
+
+        if (dashboardCtrl == null) {
+            dashboardCtrl = new DashboardCtrl();
+            logger.debug("Creating Instance of DashboardCtrl");
+        }
+        return dashboardCtrl;
     }
 }

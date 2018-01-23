@@ -21,6 +21,8 @@ public class HandlerFactory {
     private static transient volatile CustomerHandler customerHandler;
     private static transient volatile OrderHandler orderHandler;
     private static transient volatile TripHandler tripHandler;
+    private static transient volatile DashboardHandler dashboardHandler;
+
 
 
 
@@ -93,6 +95,14 @@ public class HandlerFactory {
             logger.debug("Creating Instance of TripHandler");
         }
         return tripHandler;
+    }
+    public static DashboardHandler dashboardHandler() {
+
+        if (dashboardHandler == null) {
+            dashboardHandler = new DashboardHandler();
+            logger.debug("Creating Instance of DashboardHandler");
+        }
+        return dashboardHandler;
     }
 
 }

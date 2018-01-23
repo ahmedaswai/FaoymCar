@@ -134,7 +134,7 @@ public class Driver extends GenericEntity {
         return notes;
     }
 
-    public Driver setNotes(String notes) {
+    public Driver notes(String notes) {
         this.notes = notes;
         return this;
     }

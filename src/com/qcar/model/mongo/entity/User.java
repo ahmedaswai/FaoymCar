@@ -33,7 +33,7 @@ public class User extends GenericEntity {
 
     private UserType userType;
     private String loginName;
-    private Boolean currentlyLogined=false;
+    private Boolean online=false;
 
     private List<Permission> permissionList = new ArrayList<>();
 
@@ -83,14 +83,14 @@ public class User extends GenericEntity {
         return this;
     }
 
-    public User currentlyLogined(Boolean currentlyLogined) {
-        this.currentlyLogined = currentlyLogined;
+    public User online(Boolean online) {
+        this.online = online;
 
         return this;
     }
 
-    public Boolean getCurrentlyLogined() {
-        return this.currentlyLogined;
+    public Boolean getOnline() {
+        return this.online;
     }
 
     public UserType getUserType() {

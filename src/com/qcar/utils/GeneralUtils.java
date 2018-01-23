@@ -23,6 +23,12 @@ public final class GeneralUtils {
         Date dateFromOld = Date.from(instant);
         return dateFromOld;
     }
+    public static Date getDateBeforeMonths(int months){
+        LocalDateTime now = LocalDateTime.now().minusMonths(months);
+        Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
+        Date dateFromOld = Date.from(instant);
+        return dateFromOld;
+    }
     public static String getExtension(String fileName){
         if(fileName==null||fileName.isEmpty()) throw new QCarException(ErrorCodes.UN_DEFINED_EXCEPTION);
         String[]fileParts=fileName.split("\\.");

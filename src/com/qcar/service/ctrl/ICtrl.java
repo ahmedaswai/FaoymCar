@@ -34,8 +34,8 @@ public interface ICtrl {
 
                 .handler(handler::doDelete);
 
-        mainRouter.delete()
-                .path(getRoute("bulk"))
+        mainRouter.put()
+                .path(getRoute("delete/bulk"))
                 .produces(MediaType.APPLICATION_JSON)
                 .consumes(MediaType.APPLICATION_JSON)
                 .handler(BodyHandler.create())
