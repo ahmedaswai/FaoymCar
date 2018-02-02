@@ -112,6 +112,9 @@ public class UserHandler extends GenericHandler<User> {
                 }
                 mp.put("user",u);
                 mp.put("token", JwtTokenUtil.generateToken(u).get());
+
+                ctx.vertx().eventBus().publish("auction.1", ctx.getBodyAsString());
+
                 ctx.response()
                         .putHeader("content-type", MediaType.APPLICATION_JSON)
                         .setStatusCode(200).

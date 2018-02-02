@@ -31,7 +31,11 @@ public class TripCtrl implements ICtrl{
                 .produces(MediaType.APPLICATION_JSON)
 
                 .handler(handler::findByTripStatus);
+        mainRouter.get()
+                .path(getRoute("criteria"))
+                .produces(MediaType.APPLICATION_JSON)
 
+                .handler(handler::findByCriteria);
         mainRouter.put()
                 .path(getRoute("trip-status"))
                 .handler(BodyHandler.create())

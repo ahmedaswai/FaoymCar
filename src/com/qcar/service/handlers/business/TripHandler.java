@@ -6,9 +6,12 @@ import com.qcar.dao.TripDao;
 import com.qcar.model.mongo.choicelist.TripStatus;
 import com.qcar.model.mongo.entity.Order;
 import com.qcar.model.mongo.entity.Trip;
+import com.qcar.model.mongo.search.OrderSearchCriteria;
+import com.qcar.model.mongo.search.TripSearchCriteria;
 import com.qcar.model.service.result.ServiceReturnList;
 import com.qcar.model.service.result.ServiceReturnSingle;
 import com.qcar.utils.MediaType;
+import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.RoutingContext;
@@ -50,6 +53,20 @@ public class TripHandler extends GenericHandler<Trip> {
 
                 .setStatusCode(200).end(rs);
 
+    }
+    public void findByCriteria(RoutingContext ctx){
+
+
+
+        MultiMap params=ctx.request().params();
+
+        TripSearchCriteria criteria= TripSearchCriteria.instance(params);
+
+        Buffer rs = ServiceReturnList.response(dao.findByCriteria(criteria));
+
+        ctx.response().putHeader("content-type", MediaType.APPLICATION_JSON)
+
+                .setStatusCode(200).end(rs);
     }
 
 }

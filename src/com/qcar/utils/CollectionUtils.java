@@ -2,6 +2,7 @@ package com.qcar.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.qcar.model.mongo.choicelist.PaymentMethod;
+import com.qcar.model.mongo.choicelist.TripStatus;
 import com.qcar.model.mongo.choicelist.UserType;
 import com.qcar.model.mongo.embedded.Location;
 import io.vertx.core.MultiMap;
@@ -49,6 +50,9 @@ public final class CollectionUtils {
                     break;
                 case "PaymentMethod":
                     value= PaymentMethod.getPayment(Integer.parseInt(v));
+                    break;
+                case "TripStatus":
+                    value= TripStatus.getTripStatus(Integer.parseInt(v));
                     break;
 
                 case "UserType":
