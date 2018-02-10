@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qcar.model.mongo.embedded.ClientInfo;
 import org.mongodb.morphia.annotations.Id;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-public abstract class GenericEntity {
+public abstract class GenericEntity implements Serializable {
 
 
 

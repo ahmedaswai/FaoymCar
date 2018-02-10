@@ -1,5 +1,6 @@
 package com.qcar.utils;
 
+import com.qcar.model.mongo.embedded.Location;
 import com.qcar.model.service.exception.ErrorCodes;
 import com.qcar.model.service.exception.QCarException;
 
@@ -10,6 +11,8 @@ import java.util.BitSet;
 import java.util.Date;
 
 public final class GeneralUtils {
+    private final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+
     public static BitSet bitsSet(long num) {
         BitSet bitSet = new BitSet();
         for (int i = 0; i < 32; i++)
@@ -34,6 +37,23 @@ public final class GeneralUtils {
         String[]fileParts=fileName.split("\\.");
         return fileParts[fileParts.length-1];
     }
+
+    // calculate distance based on Hiversine algorithm
+    public static int calculateDistanceInKilometer(Location start,Location end) {
+
+
+        double latDistance = Math.toRadians(start.getLat() - end.getLat());
+        double lngDistance = Math.toRadians(start.getLng() - end.getLng());
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(start.getLat())) * Math.cos(Math.toRadians(end.getLat()))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+    }
+
 
 
 }

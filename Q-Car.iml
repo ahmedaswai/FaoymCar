@@ -16,5 +16,6 @@
     <orderEntry type="library" name="jbcrypt-0.4" level="project" />
     <orderEntry type="library" name="logback-classic-1.2.3" level="project" />
     <orderEntry type="library" name="jjwt-0.9.0" level="project" />
+    <orderEntry type="library" name="fst-2.57" level="project" />
   </component>
 </module>

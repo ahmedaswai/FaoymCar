@@ -27,29 +27,37 @@ public class    QCarErrorHandler implements ErrorHandler {
         Buffer bf;
         int statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
 
+
             Throwable throwable = ctx.failure();
 
 
+            if(throwable instanceof  Exception){
+                Exception ex = (Exception) throwable;
 
-            Exception ex = (Exception) throwable;
 
+                if (ex instanceof QCarSecurityException) {
+                    QCarSecurityException e = (QCarSecurityException) ex;
+                    statusCode = HttpURLConnection.HTTP_UNAUTHORIZED;
+                    bf = ServiceError.response(ex, e.getErrorCode(), statusCode);
 
-            if (ex instanceof QCarSecurityException) {
-                QCarSecurityException e = (QCarSecurityException) ex;
-                statusCode = HttpURLConnection.HTTP_UNAUTHORIZED;
-                bf = ServiceError.response(ex, e.getErrorCode(), statusCode);
+                } else if (ex instanceof QCarException) {
+                    QCarException qCarException = (QCarException) ex;
+                    statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
+                    bf = ServiceError.response(ex, qCarException.getErrorCode(), statusCode);
+                } else {
 
-            } else if (ex instanceof QCarException) {
-                QCarException qCarException = (QCarException) ex;
-                statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
-                bf = ServiceError.response(ex, qCarException.getErrorCode(), statusCode);
-            } else {
+                    bf = ServiceError.response(new QCarException(ex, ErrorCodes.UN_DEFINED_EXCEPTION), statusCode);
+                }
+                logger.error("Exception", ex);
 
-                bf = ServiceError.response(new QCarException(ex, ErrorCodes.UN_DEFINED_EXCEPTION), statusCode);
+            }
+            else{
+                bf = ServiceError.response(new QCarException(throwable, ErrorCodes.UN_DEFINED_EXCEPTION), statusCode);
+
             }
 
 
-            logger.error("Exception", ex);
+            logger.error("Error", throwable);
 
         ctx.response()
                 .putHeader("content-type", MediaType.APPLICATION_JSON)

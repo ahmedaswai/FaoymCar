@@ -8,6 +8,7 @@ import com.qcar.model.mongo.choicelist.UserType;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User extends GenericEntity {
+public class User extends GenericEntity implements Serializable {
 
 
     private String userName;

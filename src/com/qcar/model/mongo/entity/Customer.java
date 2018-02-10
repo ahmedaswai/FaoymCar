@@ -9,6 +9,8 @@ import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.Indexes;
 import org.mongodb.morphia.utils.IndexType;
 
+import java.io.Serializable;
+
 /**
  * Created by ahmedissawi on 12/6/17.
  */
@@ -20,7 +22,7 @@ import org.mongodb.morphia.utils.IndexType;
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Customer extends GenericEntity {
+public class Customer extends GenericEntity implements Serializable {
 
     private String fullName;
     private Integer city;

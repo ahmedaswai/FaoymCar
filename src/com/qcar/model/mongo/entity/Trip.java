@@ -7,6 +7,7 @@ import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -29,11 +30,10 @@ import java.util.Date;
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class Trip extends GenericEntity {
+public class Trip extends GenericEntity implements Serializable {
 
     private Location startLoc;
     private Location endLoc;
-
 
     @Reference
     private Driver driver;
@@ -47,14 +47,15 @@ public class Trip extends GenericEntity {
     private Date proposedEndTime;
     private Double proposedDistance;
     private Double proposedCost;
+
     private Date actualStartTime;
     private Date actualEndTime;
     private Double actualCost;
     private Double actualDistance;
     private String notes;
     private Long tripNumber;
-    // waiting time in minutes
-    private Long waitingTime;
+    // waiting time in hours
+    private Integer waitingTime=0;
 
     public Location getStartLoc() {
         return startLoc;
@@ -198,6 +199,14 @@ public class Trip extends GenericEntity {
         this.tripNumber = tripNumber;
         return this;
     }
+    public Integer getWaitingTime() {
+        return waitingTime;
+    }
+
+    public Trip waitingTime(Integer waitingTime) {
+        this.waitingTime = waitingTime;
+        return this;
+    }
 
     @Override
     @JsonIgnore
@@ -205,12 +214,26 @@ public class Trip extends GenericEntity {
         return "trips";
     }
 
-    public Long getWaitingTime() {
-        return waitingTime;
-    }
-
-    public Trip waitingTime(Long waitingTime) {
-        this.waitingTime = waitingTime;
-        return this;
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Trip{");
+        sb.append("startLoc=").append(startLoc);
+        sb.append(", endLoc=").append(endLoc);
+        sb.append(", driver=").append(driver);
+        sb.append(", order=").append(order);
+        sb.append(", status=").append(status);
+        sb.append(", proposedStartTime=").append(proposedStartTime);
+        sb.append(", proposedEndTime=").append(proposedEndTime);
+        sb.append(", proposedDistance=").append(proposedDistance);
+        sb.append(", proposedCost=").append(proposedCost);
+        sb.append(", actualStartTime=").append(actualStartTime);
+        sb.append(", actualEndTime=").append(actualEndTime);
+        sb.append(", actualCost=").append(actualCost);
+        sb.append(", actualDistance=").append(actualDistance);
+        sb.append(", notes='").append(notes).append('\'');
+        sb.append(", tripNumber=").append(tripNumber);
+        sb.append(", waitingTime=").append(waitingTime);
+        sb.append('}');
+        return sb.toString();
     }
 }

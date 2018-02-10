@@ -42,6 +42,12 @@ public class TripCtrl implements ICtrl{
                 .produces(MediaType.APPLICATION_JSON)
                 .handler(handler::changeStatus);
 
+        mainRouter.post()
+                .path(getRoute("trip-cost"))
+                .handler(BodyHandler.create())
+                .produces(MediaType.APPLICATION_JSON)
+                .handler(handler::calcTripCost);
+
     }
 
 }

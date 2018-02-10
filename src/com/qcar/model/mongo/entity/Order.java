@@ -7,6 +7,7 @@ import com.qcar.model.mongo.choicelist.PaymentMethod;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ import java.util.Date;
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Order extends GenericEntity {
+public class Order extends GenericEntity implements Serializable {
     private Long orderNum;
     private Location orderLocation;
     private Location fromLocation;

@@ -3,10 +3,12 @@ package com.qcar.model.mongo.embedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.vertx.core.MultiMap;
 
+import java.io.Serializable;
+
 /**
  * Created by ahmedissawi on 12/6/17.
  */
-public class    Location {
+public class    Location implements Serializable {
 
     private Long range;
 

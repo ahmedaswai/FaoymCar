@@ -221,7 +221,7 @@ public class TripSearchCriteria {
     }
 
     public TripSearchCriteria tripToStartDate(Date d) {
-        this.tripToStartDate(d);
+        this.tripToStartDate=d;
         return this;
     }
     public Date getTripToStartDate() {

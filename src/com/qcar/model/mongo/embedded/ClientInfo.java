@@ -2,7 +2,9 @@ package com.qcar.model.mongo.embedded;
 
 import io.vertx.core.http.HttpServerRequest;
 
-public final class ClientInfo {
+import java.io.Serializable;
+
+public final class ClientInfo implements Serializable {
 
     private String uri;
     private String agent;

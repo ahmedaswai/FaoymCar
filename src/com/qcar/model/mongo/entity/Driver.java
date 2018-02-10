@@ -7,6 +7,7 @@ import com.qcar.model.mongo.embedded.Location;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.utils.IndexType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -21,7 +22,7 @@ import java.util.Date;
         }
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Driver extends GenericEntity {
+public class Driver extends GenericEntity implements Serializable {
 
     public  static final Driver instance(){
         return new Driver();

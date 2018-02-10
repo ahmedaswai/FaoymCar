@@ -9,10 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public final class FileStore {
+public final class FileStore implements Serializable {
     private long size;
     private String contentType;
     private byte[]contents=new byte[0];
